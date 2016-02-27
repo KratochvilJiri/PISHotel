@@ -19,7 +19,7 @@ var port = process.env.PORT || 8080;
 // connect to our mongoDB database 
 // mongoose.connect(db.url);
 
-mongoose.connect('mongodb://admin:juromil@ds054118.mongolab.com:54118/excel_fit', function(err) {
+mongoose.connect(db.url, function(err) {
     if (err) {
         console.log(err);
     } else {
