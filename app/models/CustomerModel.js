@@ -1,23 +1,15 @@
-var mongoose = require('mongoose');
+﻿var mongoose = require('mongoose');
 var contactStructure = require('./ContactStructure');
 
-// user model
-module.exports = mongoose.model('User', {
+//
+// Customer model
+//
+module.exports = mongoose.model('Customer', {
     // LOGIN
-    login: {
+    ID: {
         type: String,
         required: true,
         unique: true
-    },
-    // PASSWORD
-    password: {
-        type: String,
-        required: true
-    },
-    // ROLE
-    role: {
-        type: Number,
-        required: true
     },
     // NAME
     name: {
