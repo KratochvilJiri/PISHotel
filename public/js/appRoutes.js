@@ -10,19 +10,37 @@
             url: '/login',
             templateUrl: 'views/login.html'
         })
-
-        .state('dashboard', {
-            url: '/dashboard',
+        .state('home', {
+            url: '/',
+            abstract: true,
+            templateUrl: 'views/home.html'
+        })
+        .state('home.dashboard', {
+            url: '',
             templateUrl: 'views/dashboard.html'
         })
-
-        .state('users',{
-            url: '/users',
+        .state('home.customers', {
+            url: 'customers',
+            templateUrl: 'views/customers.html',
+            controller: 'CustomersController'
+        })
+        .state('home.administration', {
+            url: 'administration',
+            templateUrl: 'views/administration.html',
+            controller: 'AdministrationController'
+        })
+        .state('home.reservations', {
+            url: 'reservations',
+            templateUrl: 'views/reservations.html',
+            controller: 'ReservationsController'
+        })
+        .state('home.users',{
+            url: 'users',
             templateUrl: 'views/a_users.html'
         })
 
-        .state('newUser',{
-            url: '/newUser',
+        .state('home.user',{
+            url: 'user',
             templateUrl: 'views/a_newUser.html'
         });
    // $locationProvider.html5Mode(true);

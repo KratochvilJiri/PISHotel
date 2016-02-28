@@ -1,8 +1,15 @@
 // public/js/app.js
 
 var app = angular.module('receptionist', ['ui.router',
-	'MainCtrl', 'LoginCtrl', 'DashboardCtrl', 'AUsersCtrl', 'ANewUserCtrl',
-	'UserSrvc']);
+	'MainCtrl',
+    'LoginCtrl',
+    'DashboardCtrl',
+    'AUsersCtrl',
+    'ANewUserCtrl',
+    'ReservationsCtrl',
+    'CustomersCtrl',
+    'AdministrationCtrl',
+    'UserSrvc']);
 
 
 app.run(function ($rootScope, $timeout) {

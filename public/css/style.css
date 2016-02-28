@@ -43,6 +43,7 @@ body{
 
 .ui.menu .active.item {
 	background-color: #F49200;
+    color: white;
 }
 /* Reposive menu - end */
 

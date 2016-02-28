@@ -1,0 +1,56 @@
+<div class="grid-container">
+<div class="ui grid">
+  <!-- desktop/tablet menu -->
+  <div class="computer tablet only row">
+    <div class="ui menu navbar">
+      <span class="item">eRecepce</span>
+      <a ui-sref-active="active" ui-sref="home.dashboard" class="item">Nástěnka</a>
+      <a ui-sref-active="active" ui-sref="home.reservations" class="item">Rezervace</a>
+      <a ui-sref-active="active" ui-sref="home.customers" class="item">Zákazníci</a>
+
+
+
+      <div class="right menu">
+        <a ui-sref-active="active" ui-sref="home.administration" class="item">Administrace</a>
+        <a ui-sref-active="active" ui-sref="home.user" class="item">Uživatel <i class="user icon"></i></a>
+        <a ui-sref="login" class="item"><i class="sign out icon"></i></a>
+      </div>
+    </div>
+  </div>
+  <!-- desktop/tablet menu - end -->
+
+  <!-- mobile menu -->
+  <div class="mobile only narrow row">
+    <div class="ui navbar menu">
+      <span class="brand item">eRecepce</span>
+      <div class="right menu open">
+        <a ng-model="collapsed" ng-click="collapsed=!collapsed" href="" class="menu item">
+          <i class="sidebar icon"></i>
+        </a>
+      </div>
+    </div>
+    <div ng-show="collapsed" class="ui vertical navbar menu">
+        <a ui-sref-active="active" ui-sref="home.dashboard" class="item">Nástěnka</a>
+        <a ui-sref-active="active" ui-sref="home.reservations" class="item">Rezervace</a>
+        <a ui-sref-active="active" ui-sref="home.customers" class="item">Zákazníci</a>
+        <a ui-sref-active="active" ui-sref="home.administration" class="item">Administrace</a>
+        <a ui-sref-active="active" ui-sref="home.user" class="item">Uživatel <i class="user icon"></i></a>
+        <a ui-sref="login" class="item">Odhlásit se<i class="sign out icon"></i></a>
+
+    </div>
+  </div>
+  <!-- mobile menu - end -->
+</div>
+</div>
+
+<div class="grid-container">
+    <div class="ui grid">
+        <div class="row one column">
+            <div class="column">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
