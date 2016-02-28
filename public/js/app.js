@@ -1,6 +1,6 @@
 // public/js/app.js
 
-var app = angular.module('conferenceApp', ['ui.router', 
+var app = angular.module('receptionist', ['ui.router',
 	'MainCtrl', 'LoginCtrl', 'DashboardCtrl', 'AUsersCtrl', 'ANewUserCtrl',
 	'UserSrvc']);
 

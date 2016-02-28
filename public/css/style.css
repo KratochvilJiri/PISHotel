@@ -6,12 +6,11 @@
 
 body{
 	background-color: #EBEBEB;
-	margin-bottom: 60px;
 }
 
 .ui.navbar {
-	margin-top: 20px !important;
 	width: 100%;
+    border-radius: 0rem;
 }
 
 .padding-reset{
@@ -31,6 +30,15 @@ body{
 	margin-top: -15px !important;
 	width: 100%;
 
+}
+
+.ui.menu.navbar a.item {
+    text-transform: uppercase;
+    border-radius: 0rem;
+}
+
+.ui.menu.navbar .item .icon {
+    margin-left: 0.5rem;
 }
 
 .ui.menu .active.item {
@@ -82,6 +90,11 @@ a.whiteLink {
 
 .floatNone{
 	float: none !important;
+}
+
+.grid-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
 /* Other - end */
