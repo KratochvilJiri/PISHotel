@@ -5,7 +5,7 @@ var contactStructure = require('./ContactStructure');
 // Customer model
 //
 module.exports = mongoose.model('Customer', {
-    // LOGIN
+    // ID
     ID: {
         type: String,
         required: true,

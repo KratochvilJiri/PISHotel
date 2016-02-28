@@ -2,16 +2,16 @@
 var reservationModel = require('./ReservationModel');
 
 // Extend reservation model
-var serviceReservationModel = reservationModel;
-serviceReservationModel.prototype = {
-// TODO: See note
+var roomReservationModel = reservationModel;
+roomReservationModel.prototype = {
+    // TODO: See note
 }
 
 //
-// Service reservation model
+// Room reservation model
 //
-module.exports = mongoose.model('ServiceReservation',
-    serviceReservationModel
+module.exports = mongoose.model('RoomReservation',
+    roomReservationModel
 );
 
 // NOTE:
