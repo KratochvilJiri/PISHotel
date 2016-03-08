@@ -1,13 +1,16 @@
 <h2>Dashboard</h2>
 
 <div class="ui top attached tabular menu">
-  <a class="active item">
-    Tab 1
-  </a>
-  <a class="item">
-    Tab 2
-  </a>
+    <a class="item active" data-tab="first">First</a>
+    <a class="item" data-tab="second">Second</a>
+    <a class="item" data-tab="third">Third</a>
 </div>
-<div class="ui bottom attached segment">
-  There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+<div class="ui bottom attached tab segment active" data-tab="first">
+    First
+</div>
+<div class="ui bottom attached tab segment" data-tab="second">
+    Second
+</div>
+<div class="ui bottom attached tab segment" data-tab="third">
+    Third
 </div>

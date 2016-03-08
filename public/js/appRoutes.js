@@ -7,7 +7,7 @@
 
         // login to app
         .state('login', {
-            url: '/login',
+            url: 'login',
             templateUrl: 'views/login.html',
             controller: 'LoginController'
         })
@@ -25,24 +25,39 @@
             templateUrl: 'views/customers.html',
             controller: 'CustomersController'
         })
-        .state('home.administration', {
-            url: 'administration',
-            templateUrl: 'views/administration.html',
-            controller: 'AdministrationController'
-        })
         .state('home.reservations', {
             url: 'reservations',
             templateUrl: 'views/reservations.html',
             controller: 'ReservationsController'
         })
-        .state('home.users',{
-            url: 'users',
-            templateUrl: 'views/a_users.html'
-        })
-
-        .state('home.user',{
+        .state('home.user', {
             url: 'user',
             templateUrl: 'views/a_newUser.html'
+        })
+        .state('home.administration', {
+            url: 'administration',
+            templateUrl: 'views/administration.html',
+            controller: 'AdministrationController'
+        })
+        .state('home.administration.rooms', {
+            url: '/rooms',
+            templateUrl: 'views/rooms.html',
+            controller: 'RoomsAdministrationController'
+        })
+        .state('home.administration.equipment', {
+            url: '/equipment',
+            templateUrl: 'views/equipment.html',
+            controller: 'EquipmentAdministrationController'
+        })
+        .state('home.administration.services', {
+            url: '/services',
+            templateUrl: 'views/services.html',
+            controller: 'ServicesAdministrationController'
+        })
+        .state('home.administration.users', {
+            url: '/users',
+            templateUrl: 'views/users.html',
+            controller: 'UsersAdministrationController'
         });
    // $locationProvider.html5Mode(true);
 

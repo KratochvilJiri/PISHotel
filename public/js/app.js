@@ -4,7 +4,6 @@ var app = angular.module('receptionist', ['ui.router',
 	'MainCtrl',
     'LoginCtrl',
     'DashboardCtrl',
-    'AUsersCtrl',
     'ANewUserCtrl',
     'ReservationsCtrl',
     'CustomersCtrl',
@@ -16,6 +15,7 @@ app.run(function ($rootScope, $timeout) {
     $rootScope.$on('$viewContentLoaded', function () {
         $timeout(function () {
             $('.ui.dropdown').dropdown();
+            $('.ui.tabular .item').tab();
         }, 500);
     })
 });
