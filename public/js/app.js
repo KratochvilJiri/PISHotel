@@ -8,7 +8,8 @@ var app = angular.module('receptionist', ['ui.router',
     'ReservationsCtrl',
     'CustomersCtrl',
     'AdministrationCtrl',
-    'UserSrvc']);
+    'UserSrvc',
+    'SessionSrvc']);
 
 
 app.run(function ($rootScope, $timeout) {

@@ -41,7 +41,7 @@ body{
     margin-left: 0.5rem;
 }
 
-.ui.menu .active.item {
+.ui.menu.navbar .active.item {
 	background-color: #F49200;
     color: white;
 }
