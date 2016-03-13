@@ -49,6 +49,11 @@
             templateUrl: 'views/equipment.html',
             controller: 'EquipmentAdministrationController'
         })
+        .state('home.administration.room-new', {
+            url:'/room/new',
+            templateUrl: 'views/room_detail.html',
+            controller: 'RoomDetailAdministrationController'
+        })
         .state('home.administration.services', {
             url: '/services',
             templateUrl: 'views/services.html',

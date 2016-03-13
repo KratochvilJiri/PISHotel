@@ -1,16 +1,47 @@
 ﻿<div class="ui grid">
     <div class="row">
-        <div class="three wide column">
-            <a class="ui button basic" ui-sref="newUser">
-                <i class="plus icon"></i>
-                Nové vybavení
-            </a>
+        <div class="one column">
+            <!-- KEEP ME -->
         </div>
-        <div class="ten wide column">
-            <p></p>
-        </div>
-        <div class="three wide column">
-            <img>
+    </div>
+</div>
+
+<div class="ui grid content">
+    <div class="row">
+        <div class="one column">
+            <table class="ui celled striped table">
+                <thead>
+                    <tr>
+                        <th>Název</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="editable">
+                            <input type="text" ng-model="newItem.name" placeholder="Zadejte název vybavení" />
+                        </td>
+                        <td>
+                            <a class="ui basic button" ng-click="save(newItem)">
+                                <i class="save icon"></i> Vložit
+                            </a>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="item in equipment">
+                        <td class="editable">
+                            <input type="text" ng-model="item.name" placeholder="Zadejte název vybavení" />
+                        </td>
+                        <td>
+                            <a class="ui basic button" ng-click="remove(item)">
+                                <i class="remove red icon"></i> Smazat
+                            </a>
+                            <a class="ui basic button" ng-click="save(item)">
+                                <i class="save icon"></i> Uložit
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

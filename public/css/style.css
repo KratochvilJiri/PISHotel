@@ -32,9 +32,32 @@ body{
 
 }
 
+.ui.grid {
+    background: white;
+}
+
+.ui.grid.content {
+    background: #EBEBEB;
+}
+
 .ui.menu.navbar a.item {
     text-transform: uppercase;
     border-radius: 0rem;
+}
+
+td input {
+    width: 100%;
+    border: none;
+    border-bottom: solid 1px #EBEBEB;
+    outline: none;
+    padding: .355rem;
+    padding-left: 0rem; 
+    background: inherit;
+}
+
+td.editable {
+    padding-top: .355rem;
+    padding-bottom: .355rem;
 }
 
 .ui.menu.navbar .item .icon {

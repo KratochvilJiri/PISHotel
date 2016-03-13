@@ -48,6 +48,7 @@ app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
 require('./app/routes/UserRoutes')(app);
+require('./app/routes/EquipmentRoutes')(app);
 require('./app/routes/XRoutes')(app);
 
 // start app ===============================================
