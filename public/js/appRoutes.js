@@ -7,7 +7,7 @@
 
         // login to app
         .state('login', {
-            url: 'login',
+            url: '/login',
             templateUrl: 'views/login.html',
             controller: 'LoginController'
         })
