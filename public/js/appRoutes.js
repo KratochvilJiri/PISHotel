@@ -1,9 +1,9 @@
 // public/js/appRoutes.js
 
-    app.config( function($stateProvider, $urlRouterProvider) {
+app.config(function($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/login');
-        $stateProvider
+    $urlRouterProvider.otherwise('/login');
+    $stateProvider
 
         // login to app
         .state('login', {
@@ -14,7 +14,8 @@
         .state('home', {
             url: '/',
             abstract: true,
-            templateUrl: 'views/home.html'
+            templateUrl: 'views/home.html',
+            controller: 'HomeController'
         })
         .state('home.dashboard', {
             url: '',
@@ -29,10 +30,6 @@
             url: 'reservations',
             templateUrl: 'views/reservations.html',
             controller: 'ReservationsController'
-        })
-        .state('home.user', {
-            url: 'user',
-            templateUrl: 'views/a_newUser.html'
         })
         .state('home.administration', {
             url: 'administration',
@@ -50,7 +47,7 @@
             controller: 'EquipmentAdministrationController'
         })
         .state('home.administration.room-new', {
-            url:'/room/new',
+            url: '/room/new',
             templateUrl: 'views/room_detail.html',
             controller: 'RoomDetailAdministrationController'
         })
@@ -63,7 +60,13 @@
             url: '/users',
             templateUrl: 'views/users.html',
             controller: 'UsersAdministrationController'
-        });
-   // $locationProvider.html5Mode(true);
+        })
+        .state('home.administration.user', {
+            url: '/user',
+            templateUrl: 'views/user.html',
+            controller: 'UserController'
+        })
+        ;
+    // $locationProvider.html5Mode(true);
 
 });

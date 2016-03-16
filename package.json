@@ -1,10 +1,11 @@
 {
-  "name"         : "coomunication-tool",
+  "name"         : "hotel-reservation-app",
   "version"      : "0.0.0",
-  "description"  : "Tool for Communication Support Extern Participants of Event.",
+  "description"  : "Hotel reservation app.",
   "main"         : "server.js",
-  "author"       : "Jiri Kratochvil",
+  "author"       : "Jiri Kratochvil, Filip Matys, Tomas Lengal",
   "dependencies" : {
+    "express-session": "~1.7.6",  
     "express"    : "~4.7.2",
     "mongoose"   : "~4.1.11",
     "morgan"     : "~1.2.2",

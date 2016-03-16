@@ -4,6 +4,7 @@
 	.success(function (data, status, headers, config) {
 	    console.log(data.data[0].email);
 	    $scope.users = data.data;
+        console.log(data.data);
 	})
 	.error(function (data, status) {
 	    console.error('Error: ', status, data.error);

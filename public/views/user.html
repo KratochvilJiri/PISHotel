@@ -1,0 +1,79 @@
+<!-- new user form -->
+<div class="ui grid row">
+    <div class="ten wide column">
+        <h1> Nový uživatel</h1>
+    </div>
+
+    <!-- submit button - computer -->
+    <div class="tablet only computer only six wide column right aligned">
+        <button class="ui button fontWhite BGOrange" ng-click="createUser()">
+            Vytvořit uživatele
+        </button>
+    </div>
+
+    <!-- computer form-->
+    <div class="computer only six wide column">
+        <div class="ui form">
+            <div class="field">
+                <label>Role</label>
+                <select class="ui dropdown" ng-model="user.role">
+                    <option value="ADMINISTRATOR">Administrátor</option>
+                    <option value="RECEPTIONIST">Recepční</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Login</label>
+                <input placeholder="Login" type="text" ng-model="user.login">
+            </div>
+            <div class="field">
+                <label>Jméno</label>
+                <input placeholder="Jméno" type="text" ng-model="user.name">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input placeholder="Email" type="text" ng-model="user.email">
+            </div>
+            <div class="field">
+                <label>Adresa</label>
+                <input placeholder="Adresa" type="text" ng-model="user.address">
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile/tablet form-->
+    <div class="mobile only tablet only sixteen wide column">
+        <div class="ui form">
+            <div class="field">
+                <label>Role</label>
+                <select class="ui dropdown" ng-model="user.role">
+                    <option value="ADMINISTRATOR">Administrátor</option>
+                    <option value="RECEPTIONIST">Recepční</option>
+                </select>
+            </div>
+            <div class="field">
+                <label>Login</label>
+                <input placeholder="Login" type="text" ng-model="user.login">
+            </div>
+            <div class="field">
+                <label>Jméno</label>
+                <input placeholder="Jméno" type="text" ng-model="user.name">
+            </div>
+            <div class="field">
+                <label>Email</label>
+                <input placeholder="Email" type="text" ng-model="user.email">
+            </div>
+            <div class="field">
+                <label>Adresa</label>
+                <input placeholder="Adresa" type="text" ng-model="user.address">
+            </div>
+        </div>
+    </div>
+
+    <!-- mobile - submit button -->
+    <div class="mobile only sixteen wide column paddingTop0">
+        <button ui-sref="home.invitation" class="ui button fontWhite BGOrange fluid" ng-click="createUser()">
+            Vytvořit uživatele
+        </button>
+    </div>
+</div>
+<!-- new user form - end -->
