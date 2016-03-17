@@ -17,10 +17,7 @@
         },
         
         removeCurrentUser: function () {
-            $http.get("/api/session/remove")
-             .then(function (result) {
-                 return Session.currentUser = result.data;
-             })
+                 return Session.currentUser = {};
         }
     };
     return Session;  

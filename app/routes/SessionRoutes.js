@@ -5,11 +5,11 @@ module.exports = function (app) {
     app.get('/api/session', function (req, res) {
         // sesssion is set - true
         if (req.session.role) {
-             res.json({ isValid: true, data: true, error: null });
+             res.json({ isValid: true, data: null, error: null });
         }
         // session is not set - false
         else {
-            res.json({ isValid: true, data: false, error: null });
+            res.json({ isValid: false, data: null, error: null });
         }
     });
 

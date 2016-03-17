@@ -5,7 +5,7 @@ angular.module('HomeCtrl',[]).controller('HomeController',['$scope','SessionServ
    $scope.deauthorize = function () {
          AuthorizationService.deauthorize()
         .success(function (data) {
-            // asi nic
+            SessionService.removeCurrentUser()
         })
         .error(function(data, status){
 			console.error('Error', status, data.error);

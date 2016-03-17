@@ -24,22 +24,20 @@ app.run(function ($rootScope, $timeout) {
 });
 
 // session check
-app.run(['$rootScope', '$location', 'SessionService', function ($rootScope, $location, SessionService) {
+app.run(['$rootScope', '$state', 'SessionService', function ($rootScope, $state, SessionService) {
     // location to change
     $rootScope.$on('$stateChangeStart', function (event, next) {
         
-        $rootScope.session = SessionService;
-
         // is session set?
         SessionService.isSet()
             .success(function (data) {
                 // server session is set, client session not
-                if(data.data && $rootScope.session.currentUser == null){
+                if(data.isValid && SessionService.currentUser == null){
                     SessionService.updateCurrentUser();                 
                 }
                 // session is not set
-                else if(!data.data){
-                    $location.path('/login');
+                else if(!data.isValid){
+                    $state.go('login');
                 }
                 // server and client sessiont is set
                 else{
@@ -48,4 +46,6 @@ app.run(['$rootScope', '$location', 'SessionService', function ($rootScope, $loc
             });
     });
 }]);
+
+
 

@@ -10,12 +10,12 @@ module.exports = function (app) {
             
             // user not found
             if(!user){
-                res.json({isValid: true, data: "user not found", error: null });
+                res.json({isValid: false, data: null, error: ["User not found."] });
             }
             else if(user){
                 // check if password matches
                 if(user.password != req.body.password){
-                    res.json({isValid: true, data: "wrong password", error: null});
+                    res.json({isValid: false, data: null, error: ["Wrong password."]});
                 }
                 // user found and password is right
                 else{
