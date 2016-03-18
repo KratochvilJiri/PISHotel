@@ -29,7 +29,7 @@
 
     // Get string representation of role
     $scope.roleToString = function (role) {
-        return StatUtility.roleToString(role);
+        return StatUtility.Security.roleToString(role);
     }
 
     loadUsers();

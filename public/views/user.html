@@ -9,10 +9,8 @@
     <div class="two fields">
         <div class="field">
             <label>Role</label>
-            <select class="ui dropdown" ng-model="user.role">
+            <select ng-options="role.id as role.name for role in roles" class="ui dropdown" ng-model="user.role">
                 <option value="">Vyberte roli</option>
-                <option value="0">Administrátor</option>
-                <option value="1">Recepční</option>
             </select>
         </div>
         <div class="field">

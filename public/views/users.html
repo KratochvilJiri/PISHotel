@@ -37,8 +37,8 @@
           <a class="ui basic button" ng-click="removeUser(user._id)">
               <i class="remove red icon"></i> Smazat
           </a>
-          <a class="ui basic button">
-              <i class="write icon" ng-click="editUser(user._id)"></i> Editovat
+          <a class="ui basic button" ui-sref="home.administration.user-detail({userId: user._id})">
+              <i class="write icon"></i> Editovat
           </a>
       </td>
     </tr>

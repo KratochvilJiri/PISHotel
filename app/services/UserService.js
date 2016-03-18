@@ -34,6 +34,9 @@ module.exports = {
                 // If password is set, change it
                 if (user.password)
                     dbUser.password = user.password;
+                // If contact is set, change it
+                if (user.contact)
+                    dbUser.contact = user.contact;
 
                 // Save user
                 dbUser.save(function (err) {
@@ -112,6 +115,33 @@ module.exports = {
             callback(validation);
             return;
         });
+    },
+    // Get user
+    get: function(user, callback)   {
+        // Init validation
+        var validation = new ValidationResult(user);
+
+        // Check if _id is set
+        if (!validation.checkIsDefinedAndNotEmpty('_id', "Nelze získat uživatele bez identifikátoru")) {
+            callback(validation);
+            return;
+        }
+
+        // Load user
+        UserModel.findById(user._id, function (err, dbUser) {
+            // Check for error
+            if (err) {
+                validation.addError("Uživatele se nezdařilo nalézt v databázi");
+                callback(validation);
+                return;
+            }
+
+            // Remove password
+            dbUser.password = "";
+            validation.data = dbUser;
+            callback(validation);
+            return;
+        })
     },
     // Remove user
     remove: function(user, callback) {

@@ -16,6 +16,15 @@ module.exports = function(app) {
             });
         });
 
+        // get user
+        app.get('/api/user/:user_id', function (req, res) {
+            UserService.get({
+                _id: req.params.user_id
+            }, function (validation) {
+                res.json(validation);
+            });
+        });
+
         // delete user
         app.delete('/api/user/:user_id', function (req, res) {
             UserService.remove({
