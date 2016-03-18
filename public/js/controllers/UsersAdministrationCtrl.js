@@ -20,4 +20,9 @@
  		    console.error('Error: ', status, data.error);
  		});
     }
+
+    // Get string representation of role
+    $scope.roleToString = function (role) {
+        return StatUtility.roleToString(role);
+    }
 }]);

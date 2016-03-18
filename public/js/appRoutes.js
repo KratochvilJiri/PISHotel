@@ -64,7 +64,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('home.administration.user', {
             url: '/user',
             templateUrl: 'views/user.html',
-            controller: 'UserController'
+            controller: 'UserAdministrationController'
         })
         ;
     // $locationProvider.html5Mode(true);

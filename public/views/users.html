@@ -23,7 +23,6 @@
   <thead>
     <tr>
       <th>Jméno</th>
-      <th>Email</th>
       <th>Adresa</th>
       <th>Role</th>
       <th></th>
@@ -32,9 +31,8 @@
   <tbody ng-repeat="user in users">
     <tr>
       <td>{{user.name}}</td>
-      <td>{{user.email}}</td>
       <td>{{user.address}}</td>
-      <td>{{user.role}}</td>
+      <td>{{roleToString(user.role)}}</td>
       <td>
           <a class="ui basic button" ng-click="removeUser(user._id)">
               <i class="remove red icon"></i> Smazat
