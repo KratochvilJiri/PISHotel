@@ -3,9 +3,10 @@
     var loadUsers = function () {
         UserService.getAll()
         .success(function (data, status, headers, config) {
-            console.log(data.data[0].email);
-            $scope.users = data.data;
-            console.log(data.data);
+            if (data.isValid)
+                $scope.users = data.data;
+            else
+                $scope.showError(data.errors);
         })
         .error(function (data, status) {
             console.error('Error: ', status, data.error);
@@ -18,6 +19,7 @@
  		.success(function (data) {
  		    if (data.isValid) {
  		        loadUsers();
+ 		        $scope.showSuccess("Uživatel byl úspěšně odstraněn");
  		    } else {
  		        $scope.showError(data.errors);
  		    }

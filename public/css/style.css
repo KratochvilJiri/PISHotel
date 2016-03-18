@@ -121,7 +121,8 @@ a.whiteLink {
     padding-right: 1rem;
 }
 
-.ui.message.status-alert {
+.ui.message.status-alert,
+.ui.message.status-success {
     position: absolute;
     top: 10%;
     left: 50%;

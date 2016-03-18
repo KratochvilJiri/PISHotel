@@ -12,6 +12,7 @@
             .success(function (data, status, headers, config) {
                 if (data.isValid) {
                     $scope.newItem.name = "";
+                    $scope.showSuccess("Položka byla úspěšně uložena");
                     loadEquipment();
                 } else {
                     $scope.showError(data.errors);
@@ -27,6 +28,7 @@
         EquipmentService.delete(equipment._id)
             .success(function (data, status, headers, config) {
                 if (data.isValid) {
+                    $scope.showSuccess("Položka byla úspěšně odstraněna");
                     loadEquipment();
                 } else {
                     $scope.showError(data.errors);

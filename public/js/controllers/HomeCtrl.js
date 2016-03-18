@@ -16,6 +16,12 @@ angular.module('HomeCtrl',[]).controller('HomeController',['$scope','SessionServ
        $scope.errors = errors;
        $('html,body').animate({ scrollTop: 0 }, 'slow');
        $('.message.status-alert').fadeIn();
-    }
+   }
+
+   $scope.showSuccess = function (message) {
+       $scope.message = message;
+       $('html,body').animate({ scrollTop: 0 }, 'slow');
+       $('.message.status-success').fadeIn().delay(1200).fadeOut();
+   }
     
 }]);
