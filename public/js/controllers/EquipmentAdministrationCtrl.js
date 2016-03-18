@@ -10,11 +10,11 @@
     $scope.save = function (equipment) {
         EquipmentService.save(equipment)
             .success(function (data, status, headers, config) {
-                if (data.validation) {
+                if (data.isValid) {
                     $scope.newItem.name = "";
                     loadEquipment();
                 } else {
-                    // TODO: Show error message
+                    $scope.showError(data.errors);
                 }
             })
             .error(function (data, status) {
@@ -26,10 +26,10 @@
     $scope.remove = function (equipment) {
         EquipmentService.delete(equipment._id)
             .success(function (data, status, headers, config) {
-                if (data.validation) {
+                if (data.isValid) {
                     loadEquipment();
                 } else {
-                    // TODO: Show error message
+                    $scope.showError(data.errors);
                 }
             })
             .error(function (data, status) {

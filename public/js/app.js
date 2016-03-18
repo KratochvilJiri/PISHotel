@@ -19,6 +19,9 @@ app.run(function ($rootScope, $timeout) {
         $timeout(function () {
             $('.ui.dropdown').dropdown();
             $('.ui.tabular .item').tab();
+            $('.message .close').on('click', function () {
+                $(this).closest('.message').fadeOut(200);
+            });
         }, 500);
     })
 });

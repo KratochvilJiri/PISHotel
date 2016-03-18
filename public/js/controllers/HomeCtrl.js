@@ -1,5 +1,5 @@
 angular.module('HomeCtrl',[]).controller('HomeController',['$scope','SessionService','AuthorizationService' ,function($scope, SessionService, AuthorizationService){
-
+    $scope.errors = [];
     $scope.session = SessionService;
     
    $scope.deauthorize = function () {
@@ -10,6 +10,11 @@ angular.module('HomeCtrl',[]).controller('HomeController',['$scope','SessionServ
         .error(function(data, status){
 			console.error('Error', status, data.error);
 		 });
+   }
+
+   $scope.showError = function (errors) {
+       $scope.errors = errors;
+       $('.message.status-alert').fadeIn();
     }
     
 }]);

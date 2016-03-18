@@ -125,4 +125,12 @@ a.whiteLink {
     padding-right: 1rem;
 }
 
+.ui.message.status-alert {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    margin-left: -25%;
+    width: 50%;
+}
+
 /* Other - end */
