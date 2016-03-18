@@ -1,0 +1,158 @@
+﻿// Load required modules
+var RoomModel = require('./../models/RoomModel');
+var ValidationResult = require('./../models/ValidationResultStructure');
+var RoomTypes = require('./../configurations/RoomType');
+
+module.exports = {
+    // Save room
+    save: function (room, callback) {
+        // Validate room before saving
+        var validation = this.validate(room);
+
+        // If validation is not valid, return it
+        if (!validation.isValid) {
+            callback(validation);
+            return;
+        }
+
+        // Check if _id is set
+        if (room._id) {
+            // It is, so we are updating existing one
+            RoomModel.findById(room._id, function (err, dbRoom) {
+                // Check for error
+                if (err) {
+                    validation.addError("Pokoj se nezdařilo nalézt v databázi");
+                    callback(validation);
+                    return;
+                }
+
+                // Update room and save it
+                dbRoom.ID = room.ID;
+                dbRoom.price = room.price;
+                dbRoom.roomType = room.roomType;
+
+                // Save room
+                dbRoom.save(function (err) {
+                    if (err) {
+                        validation.addError("Pokoj se nezdařilo uložit");
+                        callback(validation);
+                        return;
+                    }
+
+                    // Call user function
+                    callback(validation);
+                    return;
+                });
+            })
+        }
+            // We are creating new
+        else {
+            RoomModel.create(room, function (err, dbRoom) {
+                // Something went wrong
+                if (err) {
+                    validation.addError("Pokoj se nezdařilo uložit");
+                    callback(validation);
+                    return;
+                }
+
+                // Call user function
+                callback(validation);
+                return;
+            });
+        }
+    },
+    // Validate
+    validate: function(room)    {
+        // Init validation
+        var validation = new ValidationResult(room);
+
+        // Check all required properties
+        validation.checkIsDefinedAndNotEmpty('ID', "Identifikátor je povinný");
+        validation.checkIsDefinedAndNotEmpty('price', "Cena je povinná");
+        validation.checkIsDefinedAndNotEmpty('roomType', "Typ je povinný");
+
+        // Return validation
+        return validation;
+    },
+    // Get room types
+    getTypes: function (callback) {
+        // Init validation
+        var validation = new ValidationResult(RoomTypes.get());
+        // And return it
+        callback(validation);
+
+    },
+    // Get list of rooms
+    getList: function (callback) {
+        // Init validation
+        var validation = new ValidationResult([]);
+
+        // Find all of them
+        RoomModel.find(function (err, rooms) {
+            // Something went wrong
+            if (err) {
+                validation.addError("Nezdařilo se získat seznam pokojů");
+                callback(validation);
+                return;
+            }
+
+            // No error, so set data
+            validation.data = rooms;
+
+            // Return validation
+            callback(validation);
+            return;
+        });
+    },
+    // Get room
+    get: function (room, callback) {
+        // Init validation
+        var validation = new ValidationResult(room);
+
+        // Check if _id is set
+        if (!validation.checkIsDefinedAndNotEmpty('_id', "Nelze získat pokoj bez identifikátoru")) {
+            callback(validation);
+            return;
+        }
+
+        // Load room
+        RoomModel.findById(room._id, function (err, dbRoom) {
+            // Check for error
+            if (err) {
+                validation.addError("Pokoj se nezdařilo nalézt v databázi");
+                callback(validation);
+                return;
+            }
+
+            // Return data
+            validation.data = dbRoom;
+            callback(validation);
+            return;
+        })
+    },
+    // Remove room
+    remove: function (room, callback) {
+        // Init validation
+        var validation = new ValidationResult(room);
+
+        // We need _id for this operation
+        if (!room._id) {
+            validation.addError("Nelze smazat položku bez identifikátoru");
+            callback(validation);
+            return;
+        }
+
+        // Remove room
+        RoomModel.remove(room, function (err, dbRoom) {
+            // Something went wrong
+            if (err) {
+                validation.addError("Nezdařilo se odebrat pokoj");
+                callback(validation);
+                return;
+            }
+
+            // Call user callback
+            callback(validation);
+        });
+    }
+}

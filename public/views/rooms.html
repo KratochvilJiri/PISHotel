@@ -1,7 +1,7 @@
 ﻿<div class="ui grid">
     <div class="row">
         <div class="three wide column">
-            <a class="ui button basic" ui-sref="home.administration.room-new">
+            <a class="ui button BGOrange fontWhite" ui-sref="home.administration.room">
                 <i class="plus icon"></i>
                 Nový pokoj
             </a>
@@ -14,3 +14,37 @@
         </div>
     </div>
 </div>
+
+<!-- START all rooms table -->
+<div class="ui grid">
+    <div class="row">
+        <div class="one column">
+            <table class="ui celled striped table">
+                <thead>
+                    <tr>
+                        <th>Identifikátor</th>
+                        <th>Typ pokoje</th>
+                        <th>Cena</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="room in rooms">
+                    <tr>
+                        <td>{{room.ID}}</td>
+                        <td>{{room.roomType.name}}</td>
+                        <td>{{room.price}} CZK</td>
+                        <td>
+                            <a class="ui basic button" ng-click="remove(room._id)">
+                                <i class="remove red icon"></i> Smazat
+                            </a>
+                            <a class="ui basic button" ui-sref="home.administration.room-detail({roomId: room._id})">
+                                <i class="write icon"></i> Editovat
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- END all rooms table -->

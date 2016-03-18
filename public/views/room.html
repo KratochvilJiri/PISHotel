@@ -1,0 +1,37 @@
+<!-- new user form -->
+
+<div class="ui attached message">
+    <div class="header">
+        Pokoj
+    </div>
+</div>
+<form class="ui form attached fluid segment">
+    <div class="field">
+        <label>Identifikátor</label>
+        <input placeholder="Identifikátor" type="text" ng-model="room.ID">
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Typ pokoje</label>
+            <select ng-options="roomType.name for roomType in roomTypes track by roomType.code" class="ui dropdown" ng-model="room.roomType">
+                <option value="">Vyberte typ pokoje</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Cena za noc</label>
+            <div class="ui right labeled input">
+                <input type="text" placeholder="Cena" ng-model="room.price">
+                <div class="ui basic label">
+                    CZK
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="ui bottom attached message">
+    <a ng-click="save()" class="ui button fontWhite BGOrange">
+        <i class="save icon"></i>
+        Save
+    </a>
+</div>
+

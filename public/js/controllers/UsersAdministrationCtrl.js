@@ -14,7 +14,7 @@
     }
 
     // remove user by ID
-    $scope.removeUser = function (userID) {
+    $scope.remove = function (userID) {
         UserService.delete(userID)
  		.success(function (data) {
  		    if (data.isValid) {

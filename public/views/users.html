@@ -1,50 +1,51 @@
 <div class="ui grid">
-  <div class="row">
-    <div class="three wide column">
-      <a class="ui button fontWhite BGOrange" ui-sref="home.administration.user">
-        <i class="plus icon"></i>
-        Nový uživatel</a>
+    <div class="row">
+        <div class="three wide column">
+            <a class="ui button fontWhite BGOrange" ui-sref="home.administration.user">
+                <i class="plus icon"></i>
+                Nový uživatel
+            </a>
+        </div>
+        <div class="ten wide column">
+            <p></p>
+        </div>
+        <div class="three wide column">
+            <img>
+        </div>
     </div>
-    <div class="ten wide column">
-      <p></p>
-    </div>
-    <div class="three wide column">
-      <img>
-    </div>
-  </div>
 </div>
 
 
 <!-- all users table -->
 <div class="ui grid">
-  <div class="row">
-      <div class="one column">
-<table class="ui celled striped table">
-  <thead>
-    <tr>
-      <th>Jméno</th>
-      <th>Adresa</th>
-      <th>Role</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody ng-repeat="user in users">
-    <tr>
-      <td>{{user.name}}</td>
-      <td>{{user.address}}</td>
-      <td>{{roleToString(user.role)}}</td>
-      <td>
-          <a class="ui basic button" ng-click="removeUser(user._id)">
-              <i class="remove red icon"></i> Smazat
-          </a>
-          <a class="ui basic button" ui-sref="home.administration.user-detail({userId: user._id})">
-              <i class="write icon"></i> Editovat
-          </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-</div>
-  </div>
+    <div class="row">
+        <div class="one column">
+            <table class="ui celled striped table">
+                <thead>
+                    <tr>
+                        <th>Jméno</th>
+                        <th>Adresa</th>
+                        <th>Role</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="user in users">
+                    <tr>
+                        <td>{{user.name}}</td>
+                        <td>{{user.address}}</td>
+                        <td>{{roleToString(user.role)}}</td>
+                        <td>
+                            <a class="ui basic button" ng-click="remove(user._id)">
+                                <i class="remove red icon"></i> Smazat
+                            </a>
+                            <a class="ui basic button" ui-sref="home.administration.user-detail({userId: user._id})">
+                                <i class="write icon"></i> Editovat
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <!-- all users table - end -->

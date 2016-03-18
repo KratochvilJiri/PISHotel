@@ -46,10 +46,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/equipment.html',
             controller: 'EquipmentAdministrationController'
         })
-        .state('home.administration.room-new', {
-            url: '/room/new',
-            templateUrl: 'views/room_detail.html',
-            controller: 'RoomDetailAdministrationController'
+        .state('home.administration.room', {
+            url: '/room',
+            templateUrl: 'views/room.html',
+            controller: 'RoomAdministrationController'
+        })
+        .state('home.administration.room-detail', {
+            url: '/room/{roomId}',
+            templateUrl: 'views/room.html',
+            controller: 'RoomAdministrationController'
         })
         .state('home.administration.services', {
             url: '/services',

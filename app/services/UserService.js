@@ -159,7 +159,7 @@ module.exports = {
         UserModel.remove(user, function (err, dbUser) {
             // Something went wrong
             if (err) {
-                validation.addError("Nezdařilo se odebrat vybavení");
+                validation.addError("Nezdařilo se odebrat uživatele");
                 callback(validation);
                 return;
             }

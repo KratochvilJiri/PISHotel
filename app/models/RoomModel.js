@@ -1,5 +1,11 @@
 ﻿var mongoose = require('mongoose');
 
+// Inner room type declaration
+var RoomType = {
+    code: String,
+    name: String
+}
+
 //
 // Room model
 //
@@ -12,7 +18,7 @@ module.exports = mongoose.model('Room', {
     },
     // ROOM TYPE
     roomType: {
-        type: Number /* ? */,
+        type: RoomType,
         required: true
     },
     // PRICE
