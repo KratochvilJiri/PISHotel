@@ -39,10 +39,6 @@ app.run(['$rootScope', '$state', 'SessionService', function ($rootScope, $state,
                 else if(!data.isValid){
                     $state.go('login');
                 }
-                // server and client sessiont is set
-                else{
-                    console.log("nic");
-                }
             });
     });
 }]);

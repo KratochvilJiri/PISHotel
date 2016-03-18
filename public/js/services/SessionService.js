@@ -17,7 +17,7 @@
         },
         
         removeCurrentUser: function () {
-                 return Session.currentUser = {};
+                 return Session.currentUser = null;
         }
     };
     return Session;  

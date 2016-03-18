@@ -20,14 +20,14 @@
             <input type="password" name="password" placeholder="Heslo" ng-model="user.password">
           </div>
         </div>
-        <a ui-sref="home.dashboard" class="whiteLink ui fluid large submit button BGOrange" ng-click="authorize()">Přihlásit</a>
+        <input type="submit" value="Přihlásit" class="whiteLink ui fluid large submit button BGOrange" ng-click="authorize()" />
       </div>
 
       <div class="ui error message"></div>
     </form>
     
     <div class="ui message">
-      Zapomněl jste heslo? <a href="#" class="fontBlue2">Obnovit.</a>
+      Zapomněli jste heslo? <a href="#" class="fontBlue2">Obnovit.</a>
     </div>
   </div>
 </div>
