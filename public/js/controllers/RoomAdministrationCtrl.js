@@ -3,6 +3,9 @@
     // init variables
     $scope.room = {};
     $scope.roomTypes = [];
+    $scope.premises = [];
+    $scope.premisesType = StatUtility.Premises.getTypes();
+    console.log($scope.premisesType);
 
     // Load room types
     RoomService.getTypes().success(function (data) {
@@ -39,6 +42,14 @@
             else {
                 $scope.showError(data.errors);
             }
+        });
+    }
+
+    $scope.addPremises = function (type) {
+        // Add new one into array
+        $scope.premises.push({
+            premisesType: type,
+            equipment: []
         });
     }
 }]);
