@@ -21,4 +21,20 @@ administrationModule.controller('UserAdministrationController', ['$scope', '$sta
 		    console.error('Error', status, data);
 		});
 	}
+
+	$scope.addContact = function (type) {
+        // Init contact array if it is not set
+	    if (!$scope.user.contact)
+	        $scope.user.contact = [];
+
+	    // Add new contact
+	    $scope.user.contact.push({
+            contactType: type
+	    });
+	}
+
+	$scope.removeContact = function (index) {
+	    // Remove contact from list
+	    $scope.user.contact.splice(index, 1);
+	}
 }]);

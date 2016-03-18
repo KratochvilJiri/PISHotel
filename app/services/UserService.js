@@ -78,6 +78,16 @@ module.exports = {
         if (!validation.data._id)
             validation.checkIsDefinedAndNotEmpty('password', "Heslo je povinné");
 
+        // If contacts array is not empty, check if data are set
+        if (validation.data.contact) {
+            // Check each contact
+            validation.data.contact.forEach(function (item) {
+                if (!item.data) {
+                    validation.addError("Kontaktní údaj musí obsahovat hodnotu");
+                }
+            });
+        }
+
         // Return validation
         return validation;
     },

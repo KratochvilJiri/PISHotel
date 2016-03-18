@@ -14,6 +14,7 @@ angular.module('HomeCtrl',[]).controller('HomeController',['$scope','SessionServ
 
    $scope.showError = function (errors) {
        $scope.errors = errors;
+       $('html,body').animate({ scrollTop: 0 }, 'slow');
        $('.message.status-alert').fadeIn();
     }
     

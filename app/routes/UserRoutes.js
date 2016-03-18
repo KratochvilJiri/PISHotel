@@ -18,7 +18,7 @@ module.exports = function(app) {
 
         // delete user
         app.delete('/api/user/:user_id', function (req, res) {
-            UserService.getList({
+            UserService.remove({
                 _id : req.params.user_id
             }, function (validation) {
                 res.json(validation);
