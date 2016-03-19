@@ -44,7 +44,7 @@
         </div>
     </div>
 </div>
-<form ng-repeat="premisesItem in premises" class="ui form attached fluid segment">
+<form ng-repeat="premisesItem in room.premises" class="ui form attached fluid segment">
     <div class="field">
         <label>Typ místnosti</label>
         <select ng-options="item.id as item.name for item in premisesType" class="ui dropdown" ng-model="premisesItem.premisesType">

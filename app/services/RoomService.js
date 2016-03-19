@@ -31,6 +31,9 @@ module.exports = {
                 dbRoom.price = room.price;
                 dbRoom.roomType = room.roomType;
 
+                // If premises is set, update it
+                dbRoom.premises = room.premises;
+
                 // Save room
                 dbRoom.save(function (err) {
                     if (err) {

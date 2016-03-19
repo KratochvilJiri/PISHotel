@@ -1,19 +1,13 @@
 ﻿var mongoose = require('mongoose');
 
 //
-// Premises model
+// Premises structure
 //
-module.exports = mongoose.model('Premises', {
+module.exports = {
     // PREMISES TYPE
     premisesType: {
         type: Number,
         required: true
-    },
-    // ROOM
-    room: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Room'
     },
     // EQUIPMENT
     equipment: [
@@ -22,4 +16,4 @@ module.exports = mongoose.model('Premises', {
             ref: 'Equipment'
         }
     ]
-});
+};

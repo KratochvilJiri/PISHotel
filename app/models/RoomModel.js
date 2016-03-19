@@ -1,4 +1,5 @@
 ﻿var mongoose = require('mongoose');
+var premisesStructure = require('./PremisesStructure');
 
 // Inner room type declaration
 var RoomType = {
@@ -25,7 +26,8 @@ module.exports = mongoose.model('Room', {
     price: {
         type: Number,
         required: true
-    }
+    },
+    // PREMISES
+    premises: [premisesStructure]
 });
 
-// TODO: Relations

@@ -3,9 +3,7 @@
     // init variables
     $scope.room = {};
     $scope.roomTypes = [];
-    $scope.premises = [];
     $scope.premisesType = StatUtility.Premises.getTypes();
-    console.log($scope.premisesType);
 
     // Load room types
     RoomService.getTypes().success(function (data) {
@@ -45,11 +43,21 @@
         });
     }
 
+    // Add premises into array
     $scope.addPremises = function (type) {
+        // Init premises array if is not
+        if (!$scope.room.premises)
+            $scope.room.premises = [];
+
         // Add new one into array
-        $scope.premises.push({
+        $scope.room.premises.push({
             premisesType: type,
             equipment: []
         });
+    }
+
+    // Remove premises from room
+    $scope.removePremises = function (index) {
+        $scope.room.premises.splice(index, 1);
     }
 }]);
