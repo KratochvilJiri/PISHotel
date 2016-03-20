@@ -52,6 +52,10 @@
         </select>
     </div>
     <div class="field">
+        <label>Vybavení</label>
+        <select class="ui fluid search dropdown" ng-model="premisesItem.equipment" ng-options="equipmentItem.name for equipmentItem in equipment track by equipmentItem._id" multiple></select>
+    </div>
+    <div class="field">
         <a ng-click="removePremises($index)" class="ui button basic">
             <i class="remove red icon"></i>
             Odstranit místnost

@@ -119,7 +119,7 @@ module.exports = {
         }
 
         // Load room
-        RoomModel.findById(room._id, function (err, dbRoom) {
+        RoomModel.findById(room._id).populate('premises.equipment').exec(function (err, dbRoom) {
             // Check for error
             if (err) {
                 validation.addError("Pokoj se nezdařilo nalézt v databázi");

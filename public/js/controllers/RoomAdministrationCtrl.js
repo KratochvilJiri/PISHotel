@@ -1,8 +1,9 @@
 ﻿administrationModule
-.controller('RoomAdministrationController', ['$scope', '$state', '$stateParams', 'RoomService', function ($scope, $state, $stateParams, RoomService) {
+.controller('RoomAdministrationController', ['$scope', '$state', '$stateParams', 'RoomService', 'EquipmentService', function ($scope, $state, $stateParams, RoomService, EquipmentService) {
     // init variables
     $scope.room = {};
     $scope.roomTypes = [];
+    $scope.equipment = [];
     $scope.premisesType = StatUtility.Premises.getTypes();
 
     // Load room types
@@ -14,7 +15,18 @@
         else {
             $scope.showError(data.errors);
         }
-    })
+    });
+
+    // Load equipment
+    EquipmentService.getAll().success(function (data) {
+        // Check if data are valid
+        if (data.isValid) {
+            $scope.equipment = data.data;
+        }
+        else {
+            $scope.showError(data.errors);
+        }
+    });
 
     // Load room if id is set
     if ($stateParams.roomId) {
