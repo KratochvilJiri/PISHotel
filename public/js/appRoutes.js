@@ -28,8 +28,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('home.reservations', {
             url: 'reservations',
-            templateUrl: 'views/reservations.html',
+            templateUrl: 'views/reservations/',
             controller: 'ReservationsController'
+        })
+        .state('home.reservations.rooms', {
+            url: '/rooms',
+            templateUrl: 'views/reservations/rooms.html',
+            controller: 'RoomsReservationsController'
+        })
+        .state('home.reservations.services', {
+            url: '/service',
+            templateUrl: 'views/reservations/services.html',
+            controller: 'ServicesReservationsController'
         })
         .state('home.administration', {
             url: 'administration',

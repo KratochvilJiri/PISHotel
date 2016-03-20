@@ -1,3 +1,4 @@
-﻿angular.module('ReservationsCtrl', []).controller('ReservationsController', ['$scope', function ($scope) {
+﻿var reservations = angular.module('ReservationsCtrl', [])
+.controller('ReservationsController', ['$scope', function ($scope) {
 
 }]);
