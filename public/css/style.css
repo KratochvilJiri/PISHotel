@@ -8,6 +8,15 @@ body{
 	background-color: #EBEBEB;
 }
 
+.app {
+    min-height: 100%;
+    position: relative;
+}
+
+div.content {
+    padding-bottom: 5rem;
+}
+
 .ui.navbar {
 	width: 100%;
     border-radius: 0rem;
@@ -65,6 +74,22 @@ td.editable {
     color: white;
 }
 /* Reposive menu - end */
+
+/* footer */
+.ui.inverted.vertical.footer.segment{
+    width: 100%;
+    padding-top: 2em;
+    padding-bottom: 2em;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #15548C;
+    margin-bottom: -1em; 
+}
+
+/* footer */
+
+
 
 tbody tr td:last-child {
     width: 1%;
