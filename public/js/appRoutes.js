@@ -64,47 +64,47 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('home.administration', {
             url: 'administration',
-            templateUrl: 'views/administration.html',
+            templateUrl: 'views/administration/',
             controller: 'AdministrationController'
         })
         .state('home.administration.rooms', {
             url: '/rooms',
-            templateUrl: 'views/rooms.html',
+            templateUrl: 'views/administration/rooms.html',
             controller: 'RoomsAdministrationController'
         })
         .state('home.administration.equipment', {
             url: '/equipment',
-            templateUrl: 'views/equipment.html',
+            templateUrl: 'views/administration/equipment.html',
             controller: 'EquipmentAdministrationController'
         })
         .state('home.administration.room', {
             url: '/room',
-            templateUrl: 'views/room.html',
+            templateUrl: 'views/administration/room.html',
             controller: 'RoomAdministrationController'
         })
         .state('home.administration.room-detail', {
             url: '/room/{roomId}',
-            templateUrl: 'views/room.html',
+            templateUrl: 'views/administration/room.html',
             controller: 'RoomAdministrationController'
         })
         .state('home.administration.services', {
             url: '/services',
-            templateUrl: 'views/services.html',
+            templateUrl: 'views/administration/services.html',
             controller: 'ServicesAdministrationController'
         })
         .state('home.administration.users', {
             url: '/users',
-            templateUrl: 'views/users.html',
+            templateUrl: 'views/administration/users.html',
             controller: 'UsersAdministrationController'
         })
         .state('home.administration.user', {
             url: '/user',
-            templateUrl: 'views/user.html',
+            templateUrl: 'views/administration/user.html',
             controller: 'UserAdministrationController'
         })
         .state('home.administration.user-detail', {
             url: '/user/{userId}',
-            templateUrl: 'views/user.html',
+            templateUrl: 'views/administration/user.html',
             controller: 'UserAdministrationController'
         });
     // $locationProvider.html5Mode(true);
