@@ -10,6 +10,7 @@ var app = angular.module('receptionist', ['ui.router',
     'HomeCtrl',
     'AuthorizationSrvc',
     'UserSrvc',
+    'CustomerSrvc',
     'SessionSrvc',
     'RoomSrvc',
     'EquipmentSrvc']);
