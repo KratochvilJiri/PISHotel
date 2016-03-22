@@ -1,0 +1,66 @@
+﻿<!-- new user form -->
+
+<div class="ui attached message">
+    <div class="header">
+        Profil
+    </div>
+</div>
+<form class="ui form attached fluid segment">
+    <div class="two fields">
+        <div class="field">
+            <label>Login</label>
+            <input placeholder="Login" type="text" ng-model="user.login">
+        </div>
+        <div class="field">
+            <label>Heslo</label>
+            <input placeholder="Password" type="password" ng-model="user.password">
+        </div>
+    </div>
+    <div class="field">
+        <label>Jméno</label>
+        <input placeholder="Jméno" type="text" ng-model="user.name">
+    </div>
+    <div class="field">
+        <label>Adresa</label>
+        <textarea rows="4" ng-model="user.address"></textarea>
+    </div>
+</form>
+<form class="ui form attached fluid segment">
+    <div class="field">
+        <div class="ui floating labeled icon dropdown button">
+            <i class="plus icon"></i>
+            <span>Přidat kontakt</span>
+            <div class="menu">
+                <div class="item" ng-click="addContact(0)">
+                    <i class="mail icon"></i>
+                    Emailová adresa
+                </div>
+                <div class="item" ng-click="addContact(1)">
+                    <i class="phone icon"></i>
+                    Telefon
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div ng-repeat="contact in user.contact" class="field">
+            <div ng-if="contact.contactType == 0" class="ui labeled left icon action input">
+                <i class="mail icon"></i>
+                <input ng-model="contact.data" type="text" placeholder="Zadejte email">
+                <button ng-click="removeContact($index)" class="ui basic button">Odebrat</button>
+            </div>
+            <div ng-if="contact.contactType == 1" class="ui labeled left icon action input">
+                <i class="phone icon"></i>
+                <input ng-model="contact.data" type="text" placeholder="Zadejte telefon">
+                <button ng-click="removeContact($index)" class="ui button basic">Odebrat</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="ui bottom attached message">
+    <a ng-click="save()" class="ui button fontWhite BGOrange">
+        <i class="save icon"></i>
+        Uložit
+    </a>
+</div>
+
