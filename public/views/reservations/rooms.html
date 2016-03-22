@@ -14,3 +14,37 @@
         </div>
     </div>
 </div>
+
+<!-- START all reservations table -->
+<div class="ui grid">
+    <div class="row">
+        <div class="one column">
+            <table class="ui celled striped table">
+                <thead>
+                    <tr>
+                        <th>Pokoj</th>
+                        <th>Datum</th>
+                        <th>Zákazník</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="reservation in reservations">
+                    <tr>
+                        <td>{{reservation.room.ID}}</td>
+                        <td>{{reservation.dateFrom}} {{reservation.dateTo}}</td>
+                        <td>{{reservation.customer.name}} CZK</td>
+                        <td>
+                            <a class="ui basic button" ng-click="reservation(room._id)">
+                                <i class="remove red icon"></i> Smazat
+                            </a>
+                            <a class="ui basic button" ui-sref="home.administration.room-detail({roomId: room._id})">
+                                <i class="write icon"></i> Editovat
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- END all reservations table -->

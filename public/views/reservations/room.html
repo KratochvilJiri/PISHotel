@@ -23,7 +23,7 @@
                     <i class="search icon"></i>
                     <input type="text" name="search" placeholder="Search...">
                 </div>
-                <div ng-repeat="customer in customers" class="item">
+                <div ng-click="setCustomer(customer)" ng-repeat="customer in customers" class="item">
                     {{customerToString(customer)}}
                 </div>
             </div>
@@ -32,11 +32,11 @@
     <div class="two fields">
         <div class="field">
             <label>Počet dospělých</label>
-            <input placeholder="Počet dospělých" type="number" ng-model="reservation.adults">
+            <input placeholder="Počet dospělých" type="number" ng-model="reservation.numberOfAdults">
         </div>
         <div class="field">
             <label>Počet dětí</label>
-            <input placeholder="Počet dětí" type="number" ng-model="reservation.children">
+            <input placeholder="Počet dětí" type="number" ng-model="reservation.numberOfChildren">
         </div>
     </div>
     <div class="two fields">

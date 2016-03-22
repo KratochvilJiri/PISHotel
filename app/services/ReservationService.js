@@ -55,6 +55,7 @@ module.exports = {
                 // Something went wrong
                 if (err) {
                     validation.addError("Rezervaci se nezdařilo uložit");
+                    console.log(err);
                     callback(validation);
                     return;
                 }

@@ -1,9 +1,32 @@
 ﻿reservations
-.controller('RoomReservationController', ['$scope', 'CustomerService', 'RoomService', 'ReservationService', function ($scope, CustomerService, RoomService, ReservationService) {
+.controller('RoomReservationController', ['$scope', '$state', 'CustomerService', 'RoomService', 'ReservationService', function ($scope, $state, CustomerService, RoomService, ReservationService) {
+    $scope.reservation = {};
     $scope.customers = [];
     $scope.rooms = [];
     $scope.pensionTypes = [];
     $scope.paymentTypes = [];
+
+    // Set customer for reservation
+    $scope.setCustomer = function (customer) {
+        $scope.reservation.customer = customer;
+    }
+
+
+    // Save reservation
+    $scope.save = function () {
+        ReservationService.save($scope.reservation)
+		.success(function (data, status, headers, config) {
+		    if (data.isValid) {
+		        $state.go('home.reservation.rooms');
+		    }
+		    else {
+		        $scope.showError(data.errors);
+		    }
+		})
+		.error(function (data, status) {
+		    console.error('Error', status, data);
+		});
+    }
 
     // Load customers TODO: based on filter
     var loadCustomers = function () {
