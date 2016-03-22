@@ -1,5 +1,6 @@
 module.exports = function (app) {
     var User = require('./../models/UserModel');
+    var Permissions = require('./../security/Permissions');  
 
     //isSet
     app.get('/api/session', function (req, res) {
@@ -23,6 +24,7 @@ module.exports = function (app) {
                 data: {
                     name: req.session.name,
                     role: req.session.role,
+                    permissions: req.session.permissions,
                     _id: req.session._id
                 }, error: null
             });
