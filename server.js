@@ -52,6 +52,7 @@ app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
 require('./app/routes/UserRoutes')(app);
+require('./app/routes/ReservationRoutes')(app);
 require('./app/routes/ServiceRoutes')(app);
 require('./app/routes/CustomerRoutes')(app);
 require('./app/routes/EquipmentRoutes')(app);

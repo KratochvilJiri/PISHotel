@@ -2,9 +2,9 @@
 var typeStructure = require('./TypeStructure');
 
 //
-// Room reservation model
+// Reservation model
 //
-module.exports = mongoose.model('RoomReservation', {
+module.exports = mongoose.model('Reservation', {
     // CUSTOMER
     customer: {
         type: mongoose.Schema.Types.ObjectId,
@@ -30,8 +30,7 @@ module.exports = mongoose.model('RoomReservation', {
     // SERVICES
     services: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service',
-        required: true
+        ref: 'Service'
     }],
     // PENSION TYPE
     pensionType: {

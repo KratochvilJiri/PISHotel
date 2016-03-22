@@ -23,6 +23,11 @@
             ];
         }
     },
+    Customer: {
+        toString: function (customer) {
+            return customer.name + " " + customer.ID;
+        }
+    },
     Premises: {
         toString: function (type) {
             switch (type) {

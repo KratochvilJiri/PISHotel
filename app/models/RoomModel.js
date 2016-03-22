@@ -14,7 +14,7 @@ module.exports = mongoose.model('Room', {
     },
     // ROOM TYPE
     roomType: {
-        type: RoomType,
+        type: typeStructure,
         required: true
     },
     // PRICE
@@ -23,6 +23,6 @@ module.exports = mongoose.model('Room', {
         required: true
     },
     // PREMISES
-    premises: [typeStructure]
+    premises: [premisesStructure]
 });
 

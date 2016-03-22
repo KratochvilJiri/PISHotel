@@ -1,0 +1,99 @@
+﻿<!-- new user form -->
+
+<div class="ui attached message">
+    <div class="header">
+        Rezervace
+    </div>
+</div>
+<form class="ui form attached fluid segment">
+    <div class="field">
+        <div class="ui floating labeled icon dropdown button">
+            <i class="user icon"></i>
+            <span class="text">Volba zákazníka</span>
+            <div class="menu">
+                <div class="item">
+                    <i class="add user icon"></i>
+                    Vytvořit nového zákazníka
+                </div>
+                <div class="divider"></div>
+                <div class="header">
+                    Vyhledat zákazníka
+                </div>
+                <div class="ui left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" name="search" placeholder="Search...">
+                </div>
+                <div ng-repeat="customer in customers" class="item">
+                    {{customerToString(customer)}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Počet dospělých</label>
+            <input placeholder="Počet dospělých" type="number" ng-model="reservation.adults">
+        </div>
+        <div class="field">
+            <label>Počet dětí</label>
+            <input placeholder="Počet dětí" type="number" ng-model="reservation.children">
+        </div>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Datum začátku pobytu</label>
+            <input type="date" ng-model="reservation.dateFrom">
+        </div>
+        <div class="field">
+            <label>Datum konce pobytu</label>
+            <input type="date" ng-model="reservation.dateTo">
+        </div>
+    </div>
+    <div class="field">
+        <label>Pokoj</label>
+        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms" class="ui dropdown" ng-model="reservation.room">
+            <option value="">Vyberte pokoj</option>
+        </select>
+    </div>
+    <div class="two fields">
+        <div class="field">
+            <label>Typ penze</label>
+            <select ng-options="item.name for item in pensionTypes" class="ui dropdown" ng-model="reservation.pensionType">
+                <option value="">Vyberte penzi</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Způsob platby</label>
+            <select ng-options="item.name for item in paymentTypes" class="ui dropdown" ng-model="reservation.paymentType">
+                <option value="">Vyberte způsobe platby</option>
+            </select>
+        </div>
+    </div>
+</form>
+<div class="ui attached message">
+    <div class="header">
+        Služby
+    </div>
+</div>
+<form class="ui form attached fluid segment">
+    <div class="field">
+        
+    </div>
+</form>
+<div class="ui attached message">
+    <div class="header">
+        Kalkulace
+    </div>
+</div>
+<form class="ui form attached fluid segment">
+    <div class="field">
+
+    </div>
+</form>
+<div class="ui bottom attached message">
+    <a ng-click="save()" class="ui button fontWhite BGOrange">
+        <i class="save icon"></i>
+        Uložit
+    </a>
+</div>
+
