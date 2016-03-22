@@ -49,11 +49,12 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('home.reservations', {
             url: 'reservations',
+            abstract: true,
             templateUrl: 'views/reservations/',
             controller: 'ReservationsController'
         })
         .state('home.reservations.rooms', {
-            url: '/rooms',
+            url: '',
             templateUrl: 'views/reservations/rooms.html',
             controller: 'RoomsReservationsController'
         })
