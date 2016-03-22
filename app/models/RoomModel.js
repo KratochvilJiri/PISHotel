@@ -1,11 +1,6 @@
 ﻿var mongoose = require('mongoose');
 var premisesStructure = require('./PremisesStructure');
-
-// Inner room type declaration
-var RoomType = {
-    code: String,
-    name: String
-}
+var typeStructure = require('./TypeStructure');
 
 //
 // Room model
@@ -28,6 +23,6 @@ module.exports = mongoose.model('Room', {
         required: true
     },
     // PREMISES
-    premises: [premisesStructure]
+    premises: [typeStructure]
 });
 
