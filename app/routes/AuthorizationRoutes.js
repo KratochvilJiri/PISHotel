@@ -21,6 +21,7 @@ module.exports = function (app) {
                 else{
                     req.session.name = user.name;
                     req.session.role = user.role;
+                    req.session._id = user._id;
                     res.json({isValid: true, data: true, error: null});
                     
                 }    

@@ -1,6 +1,6 @@
 // public/js/appRoutes.js
 
-app.config(function($stateProvider, $urlRouterProvider) {
+app.config(function ($stateProvider, $urlRouterProvider) {
 
     $urlRouterProvider.otherwise('/login');
     $stateProvider
@@ -20,6 +20,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('home.dashboard', {
             url: '',
             templateUrl: 'views/dashboard.html'
+        })
+        .state('home.profile', {
+            url: 'profile',
+            templateUrl: 'views/user.html',
+            controller: 'ProfileController'
         })
         .state('home.customers', {
             url: 'customers',
@@ -97,12 +102,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/user.html',
             controller: 'UserAdministrationController'
         })
-    .state('home.administration.user-detail', {
-        url: '/user/{userId}',
-        templateUrl: 'views/user.html',
-        controller: 'UserAdministrationController'
-    })
-        ;
+        .state('home.administration.user-detail', {
+            url: '/user/{userId}',
+            templateUrl: 'views/user.html',
+            controller: 'UserAdministrationController'
+        });
     // $locationProvider.html5Mode(true);
 
 });

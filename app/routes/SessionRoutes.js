@@ -18,7 +18,14 @@ module.exports = function (app) {
         
         // if session is set, return role and name in data
         if (req.session.role) {
-            res.json({ isValid: true, data: {name: req.session.name,role: req.session.role}, error: null });
+            res.json({
+                isValid: true,
+                data: {
+                    name: req.session.name,
+                    role: req.session.role,
+                    _id: req.session._id
+                }, error: null
+            });
         }
         // if not, return data - false
         else {
