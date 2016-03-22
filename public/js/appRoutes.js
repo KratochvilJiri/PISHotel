@@ -23,8 +23,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('home.customers', {
             url: 'customers',
-            templateUrl: 'views/customers.html',
+            abstract: true,
+            templateUrl: 'views/customers',
             controller: 'CustomersController'
+        })
+        .state('home.customers.list', {
+            url: '',
+            templateUrl: 'views/customers/customers.html',
+            controller: 'CustomersListController'
+        })
+        .state('home.customers.detail', {
+            url: '/customer/{customerId}',
+            templateUrl: 'views/customers/customer.html',
+            controller: 'CustomerController'
+        })
+        .state('home.customers.new', {
+            url: '/customer',
+            templateUrl: 'views/customers/customer.html',
+            controller: 'CustomerController'
         })
         .state('home.reservations', {
             url: 'reservations',

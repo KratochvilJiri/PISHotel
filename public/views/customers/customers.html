@@ -1,7 +1,7 @@
 ﻿<div class="ui grid">
     <div class="row">
         <div class="three wide column">
-            <a class="ui button fontWhite BGOrange" ui-sref="home.administration.user">
+            <a class="ui button fontWhite BGOrange" ui-sref="home.customers.new">
                 <i class="plus icon"></i>
                 Nový zákazník
             </a>
@@ -38,7 +38,7 @@
                             <a class="ui basic button" ng-click="remove(customer._id)">
                                 <i class="remove red icon"></i> Smazat
                             </a>
-                            <a class="ui basic button" ui-sref="home.administration.customer-detail({customerId: customer._id})">
+                            <a class="ui basic button" ui-sref="home.customers.detail({customerId: customer._id})">
                                 <i class="write icon"></i> Editovat
                             </a>
                         </td>
