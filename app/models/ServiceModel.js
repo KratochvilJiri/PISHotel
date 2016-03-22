@@ -9,16 +9,9 @@ module.exports = mongoose.model('Service', {
         type: String,
         required: true
     },
-    // LIMIT
-    limit: {
-        type: Number
-    },
     // PRICE
     price: {
-        type: Number
-    },
-    // AVAILABLE
-    available: {
-        type: Boolean
+        type: Number,
+        required: true
     }
 });

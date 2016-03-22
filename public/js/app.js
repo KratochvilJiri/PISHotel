@@ -14,6 +14,7 @@ var app = angular.module('receptionist', ['ui.router',
     'CustomerSrvc',
     'SessionSrvc',
     'RoomSrvc',
+    'ServiceSrvc',
     'EquipmentSrvc']);
 
 app.run(function ($rootScope, $timeout) {

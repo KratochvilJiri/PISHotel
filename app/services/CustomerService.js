@@ -129,7 +129,6 @@ module.exports = {
             }
 
             // Remove password
-            dbCustomer.password = "";
             validation.data = dbCustomer;
             callback(validation);
             return;
