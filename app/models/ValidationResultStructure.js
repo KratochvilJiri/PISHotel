@@ -21,4 +21,12 @@ module.exports = function (data) {
         this.addError(error);
         return false;
     }
+
+    // Append validation
+    this.append = function(validation)   {
+        this.errors = this.errors.concat(validation.errors);
+        this.isValid = this.isValid && validation.isValid;
+
+        return this.isValid;
+    }
 };

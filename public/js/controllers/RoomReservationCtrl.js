@@ -23,6 +23,24 @@
         });
     }
 
+    // Watch for reservation change
+    $scope.$watch('reservation', function (newVal, oldVal) {
+        // Check if dates are set
+        if (!newVal.dateFrom || !newVal.dateTo)
+            return;
+
+        // Check if value changed
+        if (newVal.dateFrom == oldVal.dateFrom && newVal.dateTo == oldVal.dateTo)
+            return;
+
+        // Invalid date
+        if (newVal.dateFrom > newVal.dateTo)
+            return;
+
+        // Load available rooms based on date
+        loadAvailableRooms();
+    }, true);
+
     // Set customer for reservation
     $scope.setCustomer = function (customer) {
         $scope.reservation.customer = customer;
@@ -82,8 +100,11 @@
     }
 
     // Load rooms TODO: just available ones
-    var loadRooms = function () {
-        RoomService.getAll()
+    var loadAvailableRooms = function () {
+        RoomService.getAvailable({
+            dateFrom: $scope.reservation.dateFrom,
+            dateTo: $scope.reservation.dateTo
+        })
         .success(function (data, status, headers, config) {
             if (data.isValid)
                 $scope.rooms = data.data;
@@ -148,5 +169,4 @@
     loadPensions();
     loadCustomers();
     loadServices();
-    loadRooms();
 }]);

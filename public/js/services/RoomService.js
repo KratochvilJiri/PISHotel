@@ -9,6 +9,10 @@
         getAll: function () {
             return $http.get("/api/room");
         },
+        // Get all rooms
+        getAvailable: function (period) {
+            return $http.post("/api/room/available", period);
+        },
         // Get room types
         getTypes: function () {
             return $http.get("/api/room/types");

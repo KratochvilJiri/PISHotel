@@ -2,6 +2,7 @@
 var RoomModel = require('./../models/RoomModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var RoomTypes = require('./../configurations/RoomType');
+var ReservationService = require('./ReservationService');
 
 module.exports = {
     // Save room
@@ -76,6 +77,56 @@ module.exports = {
 
         // Return validation
         return validation;
+    },
+    // Get availabel rooms for given period
+    getAvailableRooms(period, callback) {
+        // Init validation
+        var validation = new ValidationResult([]);
+
+        // First get rooms, that are in given period
+        ReservationService.getFilteredList({
+            $and: [
+                {
+                    $or: [
+                        { dateFrom: { $gt: period.dateFrom } },
+                        { dateTo: { $gt: period.dateFrom } }
+                    ]
+                },
+                {
+                    $or: [
+                        { dateFrom: { $lt: period.dateTo } },
+                        { dateTo: { $lt: period.dateTo } }
+                    ]
+                }
+            ]
+        }, 0, ['room'], [], function (reservationValidation) {
+            // Check validation of reservation
+            if (!validation.append(reservationValidation)) {
+                callback(validation);
+                return;
+            }
+
+            // Now get all rooms, that are free
+            RoomModel.find({
+                _id: {
+                    $nin: reservationValidation.data.map(function (item) {
+                        return item.room;
+                    })
+                }
+            }).exec(function (err, rooms) {
+                // Check for error
+                if (err) {
+                    validation.addError("Nezdařilo se získat seznam pokojů");
+                    callback(validation);
+                    return;
+                }
+
+                // Set data and return result
+                validation.data = rooms;
+                callback(validation);
+                return;
+            });
+        });
     },
     // Get room types
     getTypes: function (callback) {

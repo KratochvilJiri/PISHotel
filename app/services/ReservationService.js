@@ -103,6 +103,45 @@ module.exports = {
         callback(validation);
 
     },
+    // Get filtered list
+    getFilteredList: function (filter, limit, select, populate, callback) {
+        // Init validation
+        var validation = new ValidationResult([]);
+
+        // Prepare query
+        var query = ReservationModel.find(filter);
+
+        // Check for select
+        if (select.length > 0) {
+            query.select(select.join(" "));
+        }
+
+        // Check for populate
+        if (populate.length > 0) {
+            query.populate(select.join(" "));
+        }
+
+        // Check for limit
+        if (limit > 0) {
+            query.limit(limit);
+        }
+
+        // Execute query
+        query.exec(function (err, result) {
+            // Something went wrong
+            if (err) {
+                validation.addError("Nezdařilo se získat seznam rezervací");
+                callback(validation);
+                return;
+            }
+
+            // Set data
+            validation.data = result;
+
+            // Return validation
+            callback(validation);
+        });
+    },
     // Get list of reservations
     getList: function (callback) {
         // Init validation

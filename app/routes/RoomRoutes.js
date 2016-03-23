@@ -23,6 +23,13 @@
         });
     });
 
+    // get available rooms
+    app.post('/api/room/available', function (req, res) {
+        RoomService.getAvailableRooms(req.body, function (validation) {
+            res.json(validation);
+        });
+    });
+
     // get room
     app.get('/api/room/:room_id', function (req, res) {
         RoomService.get({
