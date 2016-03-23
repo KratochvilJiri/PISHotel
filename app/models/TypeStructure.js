@@ -1,4 +1,5 @@
 ﻿module.exports = {
     code: String,
-    name: String
+    name: String,
+    value: Number
 }

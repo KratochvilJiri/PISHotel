@@ -3,15 +3,18 @@
         return [
             {
                 code: "PPZ",
-                name: "Polopenze"
+                name: "Polopenze",
+                value: 100
             },
             {
                 code: "ALL",
-                name: "All inclusive"
+                name: "All inclusive",
+                value: 500
             },
             {
                 code: "PLZ",
-                name: "Plná penze"
+                name: "Plná penze",
+                value: 200
             }
         ];
     }
