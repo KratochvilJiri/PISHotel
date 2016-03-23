@@ -1,5 +1,6 @@
 ﻿var mongoose = require('mongoose');
 var typeStructure = require('./TypeStructure');
+var reservationServiceStructure = require('./ReservationServiceStructure');
 
 //
 // Reservation model
@@ -28,10 +29,7 @@ module.exports = mongoose.model('Reservation', {
         required: true
     },
     // SERVICES
-    services: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service'
-    }],
+    services: [reservationServiceStructure],
     // PENSION TYPE
     pensionType: {
         type: typeStructure,

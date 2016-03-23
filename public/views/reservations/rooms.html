@@ -31,13 +31,13 @@
                 <tbody ng-repeat="reservation in reservations">
                     <tr>
                         <td>{{reservation.room.ID}}</td>
-                        <td>{{reservation.dateFrom}} {{reservation.dateTo}}</td>
-                        <td>{{reservation.customer.name}} CZK</td>
+                        <td>{{reservation.dateFrom | date }} - {{reservation.dateTo | date}}</td>
+                        <td>{{reservation.customer.name}}</td>
                         <td>
-                            <a class="ui basic button" ng-click="reservation(room._id)">
+                            <a class="ui basic button" ng-click="remove(reservation._id)">
                                 <i class="remove red icon"></i> Smazat
                             </a>
-                            <a class="ui basic button" ui-sref="home.administration.room-detail({roomId: room._id})">
+                            <a class="ui basic button" ui-sref="home.reservations.detail({reservationId: reservation._id})">
                                 <i class="write icon"></i> Editovat
                             </a>
                         </td>

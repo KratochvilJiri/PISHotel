@@ -16,7 +16,8 @@ var app = angular.module('receptionist', ['ui.router',
     'RoomSrvc',
     'ServiceSrvc',
     'ReservationSrvc',
-    'EquipmentSrvc']);
+    'EquipmentSrvc',
+    'formatters']);
 
 app.run(function ($rootScope, $timeout) {
     $rootScope.$on('$viewContentLoaded', function () {

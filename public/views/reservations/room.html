@@ -42,44 +42,75 @@
     <div class="two fields">
         <div class="field">
             <label>Datum začátku pobytu</label>
-            <input type="date" ng-model="reservation.dateFrom">
+            <input type="date" ng-model="reservation.dateFrom" format-date>
         </div>
         <div class="field">
             <label>Datum konce pobytu</label>
-            <input type="date" ng-model="reservation.dateTo">
+            <input type="date" ng-model="reservation.dateTo" format-date>
         </div>
     </div>
     <div class="field">
         <label>Pokoj</label>
-        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms" class="ui dropdown" ng-model="reservation.room">
+        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms track by item._id" class="ui dropdown" ng-model="reservation.room">
             <option value="">Vyberte pokoj</option>
         </select>
     </div>
     <div class="two fields">
         <div class="field">
             <label>Typ penze</label>
-            <select ng-options="item.name for item in pensionTypes" class="ui dropdown" ng-model="reservation.pensionType">
+            <select ng-options="item.name for item in pensionTypes track by item.code" class="ui dropdown" ng-model="reservation.pensionType">
                 <option value="">Vyberte penzi</option>
             </select>
         </div>
         <div class="field">
             <label>Způsob platby</label>
-            <select ng-options="item.name for item in paymentTypes" class="ui dropdown" ng-model="reservation.paymentType">
-                <option value="">Vyberte způsobe platby</option>
+            <select ng-options="item.name for item in paymentTypes track by item.code" class="ui dropdown" ng-model="reservation.paymentType">
+                <option value="">Vyberte způsob platby</option>
             </select>
         </div>
     </div>
 </form>
-<div class="ui attached message">
-    <div class="header">
-        Služby
-    </div>
-</div>
-<form class="ui form attached fluid segment">
-    <div class="field">
-        
-    </div>
-</form>
+<table class="ui celled attached striped table">
+    <thead>
+        <tr>
+            <th>Název služby</th>
+            <th>Počet</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="editable">
+                <select ng-options="item.name for item in services" class="ui dropdown" ng-model="newReservationService.service">
+                    <option value="">Vyberte službu</option>
+                </select>
+            </td>
+            <td class="editable">
+                <input type="number" ng-model="newReservationService.count" placeholder="Zadejte počet" />
+            </td>
+            <td>
+                <a class="ui basic button" ng-click="addService(newReservationService)">
+                    <i class="save icon"></i> Vložit
+                </a>
+            </td>
+        </tr>
+        <tr ng-repeat="service in reservation.services">
+            <td class="editable">
+                <select ng-options="item.name for item in services track by item._id" class="ui dropdown" ng-model="service.service">
+                    <option value="">Vyberte službu</option>
+                </select>
+            </td>
+            <td class="editable">
+                <input type="number" ng-model="service.count" placeholder="Zadejte cenu služby" />
+            </td>
+            <td>
+                <a class="ui basic button" ng-click="removeService($index)">
+                    <i class="remove red icon"></i> Smazat
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
 <div class="ui attached message">
     <div class="header">
         Kalkulace

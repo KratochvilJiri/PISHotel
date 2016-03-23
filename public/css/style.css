@@ -73,6 +73,11 @@ td.editable {
     padding-bottom: .355rem;
 }
 
+td.editable .dropdown.selection,
+td.editable select {
+    width: 100%;
+}
+
 .ui.menu.navbar .item .icon {
     margin-left: 0.5rem;
 }

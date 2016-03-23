@@ -28,12 +28,17 @@ module.exports = {
                 }
 
                 // Update reservation and save it
-                dbReservation.ID = reservation.ID;
-                dbReservation.price = reservation.price;
-                dbReservation.reservationType = reservation.reservationType;
+                dbReservation.customer = reservation.customer;
+                dbReservation.paymentType = reservation.paymentType;
+                dbReservation.pensionType = reservation.pensionType;
+                dbReservation.dateFrom = reservation.dateFrom;
+                dbReservation.dateTo = reservation.dateTo;
+                dbReservation.room = reservation.room;
+                dbReservation.numberOfAdults = reservation.numberOfAdults;
+                dbReservation.numberOfChildren = reservation.numberOfChildren;
 
                 // If premises is set, update it
-                dbReservation.premises = reservation.premises;
+                dbReservation.services = reservation.services;
 
                 // Save reservation
                 dbReservation.save(function (err) {
@@ -104,7 +109,7 @@ module.exports = {
         var validation = new ValidationResult([]);
 
         // Find all of them
-        ReservationModel.find(function (err, reservations) {
+        ReservationModel.find().populate('room customer').exec(function (err, reservations) {
             // Something went wrong
             if (err) {
                 validation.addError("Nezdařilo se získat seznam rezervací");
@@ -132,7 +137,7 @@ module.exports = {
         }
 
         // Load reservation
-        ReservationModel.findById(reservation._id).populate('services room customer').exec(function (err, dbReservation) {
+        ReservationModel.findById(reservation._id).populate('services.service room customer').exec(function (err, dbReservation) {
             // Check for error
             if (err) {
                 validation.addError("Rezervaci se nezdařilo nalézt v databázi");
