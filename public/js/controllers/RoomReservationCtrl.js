@@ -141,18 +141,22 @@
 
     // Load rooms
     var loadAvailableRooms = function () {
+        // Set reservation id, if we are on detail
+        var reservation = "";
+        if ($stateParams.reservationId)
+            reservation = $stateParams.reservationId;
+
+        // Get available rooms
         RoomService.getAvailable({
-            dateFrom: $scope.reservation.dateFrom,
-            dateTo: $scope.reservation.dateTo
+            period: {
+                dateFrom: $scope.reservation.dateFrom,
+                dateTo: $scope.reservation.dateTo
+            },
+            reservation: reservation
         })
         .success(function (data, status, headers, config) {
             if (data.isValid) {
-                // Creating new
-                if (!$stateParams.reservationId)
-                    $scope.rooms = data.data;
-                else {
-
-                }
+                $scope.rooms = data.data;
             }
             else
                 $scope.showError(data.errors);

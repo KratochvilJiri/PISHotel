@@ -79,27 +79,36 @@ module.exports = {
         return validation;
     },
     // Get availabel rooms for given period
-    getAvailableRooms(period, callback) {
+    getAvailableRooms(filter, callback) {
         // Init validation
         var validation = new ValidationResult([]);
 
-        // First get rooms, that are in given period
-        ReservationService.getFilteredList({
+        // Prepare queryFilter
+        var queryFilter = {
             $and: [
                 {
                     $or: [
-                        { dateFrom: { $gt: period.dateFrom } },
-                        { dateTo: { $gt: period.dateFrom } }
+                        { dateFrom: { $gt: filter.period.dateFrom } },
+                        { dateTo: { $gt: filter.period.dateFrom } }
                     ]
                 },
                 {
                     $or: [
-                        { dateFrom: { $lt: period.dateTo } },
-                        { dateTo: { $lt: period.dateTo } }
+                        { dateFrom: { $lt: filter.period.dateTo } },
+                        { dateTo: { $lt: filter.period.dateTo } }
                     ]
                 }
             ]
-        }, 0, ['room'], [], function (reservationValidation) {
+        };
+
+        // If reservation is set, add it to filter
+        if (filter.reservation)
+            queryFilter.$and.push({
+                _id: { $ne: filter.reservation }
+            });
+
+        // First get rooms, that are in given period
+        ReservationService.getFilteredList(queryFilter, 0, ['room'], [], function (reservationValidation) {
             // Check validation of reservation
             if (!validation.append(reservationValidation)) {
                 callback(validation);

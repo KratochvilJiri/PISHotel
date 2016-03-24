@@ -127,8 +127,6 @@ module.exports = {
             query.limit(limit);
         }
 
-        console.log(query);
-
         // Execute query
         query.exec(function (err, result) {
             // Something went wrong
