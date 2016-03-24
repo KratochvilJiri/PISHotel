@@ -9,6 +9,13 @@
     $scope.pensionTypes = [];
     $scope.paymentTypes = [];
     $scope.newReservationService = {};
+    $scope.calculation = {
+        overall: 0,
+        numberOfDays: 0,
+        room: 0,
+        pensionAdults: 0,
+        pensionChildren: 0
+    };
 
     // Load reservation if id is set
     if ($stateParams.reservationId) {
@@ -22,19 +29,52 @@
             }
         });
     }
+    
+    // Calculate amount to pay
+    var calculate = function () {
+        // Get number of days
+        $scope.calculation.numberOfDays = Math.round((new Date($scope.reservation.dateTo) - new Date($scope.reservation.dateFrom)) / (1000 * 60 * 60 * 24));
+        // Set price for room, if room is set
+        if ($scope.reservation.room) {
+            $scope.calculation.room = $scope.calculation.numberOfDays * $scope.reservation.room.price;
+        }
 
+        // Set price for pensions, if is set
+        if ($scope.reservation.pensionType) {
+            var base = $scope.calculation.numberOfDays * $scope.reservation.pensionType.value;
+            $scope.calculation.pensionAdults = base * $scope.reservation.numberOfAdults;
+            $scope.calculation.pensionChildren = Math.round(base * $scope.reservation.numberOfChildren * 0.7);
+        }
+
+        // Calculate services
+        var services = 0;
+        if ($scope.reservation.services) {
+            // Go through each
+            for (var index = 0; index < $scope.reservation.services.length; index++) {
+                services += $scope.reservation.services[index].count * $scope.reservation.services[index].service.price;
+            }
+        }
+
+        // Get it all together
+        $scope.calculation.overall = $scope.calculation.room + $scope.calculation.pensionAdults;
+        $scope.calculation.overall += $scope.calculation.pensionChildren + services;
+    }
+        
     // Watch for reservation change
     $scope.$watch('reservation', function (newVal, oldVal) {
         // Check if dates are set
         if (!newVal.dateFrom || !newVal.dateTo)
             return;
 
-        // Check if value changed
-        if (newVal.dateFrom == oldVal.dateFrom && newVal.dateTo == oldVal.dateTo)
-            return;
-
         // Invalid date
         if (newVal.dateFrom > newVal.dateTo)
+            return;
+
+        // Calculate overal price
+        calculate();
+
+        // Check if value changed
+        if (newVal.dateFrom == oldVal.dateFrom && newVal.dateTo == oldVal.dateTo)
             return;
 
         // Load available rooms based on date
@@ -99,15 +139,21 @@
         });
     }
 
-    // Load rooms TODO: just available ones
+    // Load rooms
     var loadAvailableRooms = function () {
         RoomService.getAvailable({
             dateFrom: $scope.reservation.dateFrom,
             dateTo: $scope.reservation.dateTo
         })
         .success(function (data, status, headers, config) {
-            if (data.isValid)
-                $scope.rooms = data.data;
+            if (data.isValid) {
+                // Creating new
+                if (!$stateParams.reservationId)
+                    $scope.rooms = data.data;
+                else {
+
+                }
+            }
             else
                 $scope.showError(data.errors);
         })
@@ -116,7 +162,7 @@
         });
     };
 
-        // Load services TODO: based on filter
+        // Load services
     var loadServices = function () {
         ServiceService.getAll()
         .success(function (data, status, headers, config) {

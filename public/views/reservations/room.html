@@ -58,7 +58,7 @@
     <div class="two fields">
         <div class="field">
             <label>Typ penze</label>
-            <select ng-options="item.name for item in pensionTypes track by item.code" class="ui dropdown" ng-model="reservation.pensionType">
+            <select ng-options="(item.name + ' za ' + item.value + 'CZK') for item in pensionTypes track by item.code" class="ui dropdown" ng-model="reservation.pensionType">
                 <option value="">Vyberte penzi</option>
             </select>
         </div>
@@ -70,6 +70,11 @@
         </div>
     </div>
 </form>
+<div class="ui attached message">
+    <div class="header">
+        Služby
+    </div>
+</div>
 <table class="ui celled attached striped table">
     <thead>
         <tr>
@@ -116,11 +121,58 @@
         Kalkulace
     </div>
 </div>
-<form class="ui form attached fluid segment">
-    <div class="field">
-
-    </div>
-</form>
+<table class="ui celled attached striped table">
+    <thead>
+        <tr>
+            <th>Obecné</th>
+            <th>Počet</th>
+            <th>Cena za položku</th>
+            <th>Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-if="reservation.room">
+            <td>Pokoj</td>
+            <td>{{calculation.numberOfDays}}</td>
+            <td>{{reservation.room.price}}</td>
+            <td>{{calculation.room}}</td>
+        </tr>
+        <tr ng-if="reservation.pensionType">
+            <td>Stravování dospělí</td>
+            <td>{{calculation.numberOfDays * reservation.numberOfAdults}}</td>
+            <td>{{reservation.pensionType.value}}</td>
+            <td>{{calculation.pensionAdults}}</td>
+        </tr>
+        <tr ng-if="reservation.pensionType">
+            <td>Stravování děti</td>
+            <td>{{calculation.numberOfDays * reservation.numberOfChildren}}</td>
+            <td>{{reservation.pensionType.value}} * 0.7</td>
+            <td>{{calculation.pensionChildren}}</td>
+        </tr>
+    </tbody>
+    <thead>
+        <tr>
+            <th>Služby</th>
+            <th>Počet</th>
+            <th>Cena za položku</th>
+            <th>Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="service in reservation.services">
+            <td>{{service.service.name}}</td>
+            <td>{{service.count}}</td>
+            <td>{{service.service.price}}</td>
+            <td>{{service.service.price * service.count}}</td>
+        </tr>
+        <tr>
+            <td><b>Celkem</b></td>
+            <td></td>
+            <td></td>
+            <td><b>{{calculation.overall}}</b></td>
+        </tr>
+    </tbody>
+</table>
 <div class="ui bottom attached message">
     <a ng-click="save()" class="ui button fontWhite BGOrange">
         <i class="save icon"></i>
