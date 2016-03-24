@@ -13,6 +13,10 @@ body{
     position: relative;
 }
 
+div.login-window {
+    margin-top: 10%; 
+}
+
 div.app-content {
     padding-bottom: 5rem;
 }
