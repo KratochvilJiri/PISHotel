@@ -51,8 +51,8 @@
     </div>
     <div class="field">
         <label>Pokoj</label>
-        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms track by item._id" class="ui dropdown" ng-model="reservation.room">
-            <option value="">Vyberte pokoj</option>
+        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms track by item._id" ng-model="reservation.room">
+            <option disabled value="">Vyberte pokoj</option>
         </select>
     </div>
     <div class="two fields">
