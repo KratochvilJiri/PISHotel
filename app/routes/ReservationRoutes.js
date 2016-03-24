@@ -23,6 +23,18 @@
         });
     });
 
+    // get reservations based in filter
+    app.post('/api/reservation/filtered', function (req, res) {
+        ReservationService.getFilteredList(
+            req.body.filter,
+            req.body.limit,
+            req.body.select,
+            req.body.populate,
+            function (validation) {
+            res.json(validation);
+        })
+    });
+
     // get all reservations
     app.get('/api/reservation', function (req, res) {
         ReservationService.getList(function (validation) {

@@ -58,6 +58,11 @@ app.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: 'views/reservations/rooms.html',
             controller: 'RoomsReservationsController'
         })
+        .state('home.reservations.room', {
+            url: '/room/{roomId}',
+            templateUrl: 'views/reservations/rooms.html',
+            controller: 'RoomReservationsController'
+        })
         .state('home.reservations.new', {
             url: '/reservation',
             templateUrl: 'views/reservations/room.html',

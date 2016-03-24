@@ -3,6 +3,7 @@ var ReservationModel = require('./../models/ReservationModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
+var MongoUtils = require('./../utilities/MongoUtils');
 
 module.exports = {
     // Save reservation
@@ -109,22 +110,24 @@ module.exports = {
         var validation = new ValidationResult([]);
 
         // Prepare query
-        var query = ReservationModel.find(filter);
+        var query = ReservationModel.find(MongoUtils.mapFilter(filter));
 
         // Check for select
-        if (select.length > 0) {
+        if (select && select.length > 0) {
             query.select(select.join(" "));
         }
 
         // Check for populate
-        if (populate.length > 0) {
-            query.populate(select.join(" "));
+        if (populate && populate.length > 0) {
+            query.populate(populate.join(" "));
         }
 
         // Check for limit
         if (limit > 0) {
             query.limit(limit);
         }
+
+        console.log(query);
 
         // Execute query
         query.exec(function (err, result) {

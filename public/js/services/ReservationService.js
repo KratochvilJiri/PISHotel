@@ -9,6 +9,10 @@
         getAll: function () {
             return $http.get("/api/reservation");
         },
+        // Get filtered reservations
+        getFiltered: function(query) {
+            return $http.post("/api/reservation/filtered", query);
+        },
         // Get payment types
         getPaymentTypes: function () {
             return $http.get("/api/reservation/payments");
