@@ -96,8 +96,8 @@ td.editable select {
 /* footer */
 .ui.inverted.vertical.footer.segment{
     width: 100%;
-    padding-top: 2em;
-    padding-bottom: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
     position: absolute;
     bottom: 0;
     left: 0;
