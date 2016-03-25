@@ -1,8 +1,9 @@
-﻿// Load required modules
+// Load required modules
 var RoomModel = require('./../models/RoomModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var RoomTypes = require('./../configurations/RoomType');
 var ReservationService = require('./ReservationService');
+var ReservationModel = require('./../models/ReservationModel');
 
 module.exports = {
     // Save room
@@ -204,9 +205,17 @@ module.exports = {
             callback(validation);
             return;
         }
-
-        // Remove room
-        RoomModel.remove(room, function (err, dbRoom) {
+        
+         //check if there are any reservations on the room
+         ReservationModel.count({room:room._id}, function(err, count) {
+           
+           if(count > 0){
+              validation.addError("Nelze smazat pokoj pro který existují rezervace.");
+              callback(validation);
+              return;            
+            }
+           
+            RoomModel.remove(room, function (err, dbRoom) {
             // Something went wrong
             if (err) {
                 validation.addError("Nezdařilo se odebrat pokoj");
@@ -216,6 +225,9 @@ module.exports = {
 
             // Call user callback
             callback(validation);
-        });
+          });
+         });
+
+
     }
 }

@@ -1,4 +1,4 @@
-﻿// Load required modules
+// Load required modules
 var ReservationModel = require('./../models/ReservationModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
@@ -203,6 +203,7 @@ module.exports = {
             return;
         }
 
+         
         // Remove reservation
         ReservationModel.remove(reservation, function (err, dbReservation) {
             // Something went wrong
