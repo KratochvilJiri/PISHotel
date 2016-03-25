@@ -146,17 +146,27 @@ module.exports = {
             return;
         }
 
-        // Remove equipment
-        CustomerModel.remove(customer, function (err, dbCustomer) {
-            // Something went wrong
-            if (err) {
-                validation.addError("Nezdařilo se odebrat zákazníka");
+        //check if there are any reservations on the customer
+        ReservationModel.count({ customer: customer._id }, function (err, count) {
+
+            if (count > 0) {
+                validation.addError("Nelze smazat zákazníka pro kterého existují rezervace.");
                 callback(validation);
                 return;
             }
 
-            // Call user callback
-            callback(validation);
+            // Remove equipment
+            CustomerModel.remove(customer, function (err, dbCustomer) {
+                // Something went wrong
+                if (err) {
+                    validation.addError("Nezdařilo se odebrat zákazníka");
+                    callback(validation);
+                    return;
+                }
+
+                // Call user callback
+                callback(validation);
+            });
         });
     }
 }
