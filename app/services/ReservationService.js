@@ -3,7 +3,6 @@ var ReservationModel = require('./../models/ReservationModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
-var MongoUtils = require('./../utilities/MongoUtils');
 
 module.exports = {
     // Save reservation
@@ -110,7 +109,7 @@ module.exports = {
         var validation = new ValidationResult([]);
 
         // Prepare query
-        var query = ReservationModel.find(MongoUtils.mapFilter(filter));
+        var query = ReservationModel.find(filter);
 
         // Check for select
         if (select && select.length > 0) {

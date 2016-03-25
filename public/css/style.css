@@ -64,7 +64,8 @@ td input {
     background: inherit;
 }
 
-div.field .dropdown.button {
+div.field .dropdown.button,
+.ui.input {
     width: 100%;
 }
 

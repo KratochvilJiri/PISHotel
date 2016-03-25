@@ -8,7 +8,10 @@
         getAll: function () {
             return $http.get("/api/customer");
         },
-
+        // Get filtered customers
+        getFiltered: function (query) {
+            return $http.post("/api/customer/filtered", query);
+        },
         delete: function (customerID) {
             return $http.delete("/api/customer/" + customerID);
         },

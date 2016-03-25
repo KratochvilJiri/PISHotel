@@ -16,6 +16,18 @@
         });
     });
 
+    // get customers based in filter
+    app.post('/api/customer/filtered', function (req, res) {
+        CustomerService.getFilteredList(
+            req.body.filter,
+            req.body.limit,
+            req.body.select,
+            req.body.populate,
+            function (validation) {
+                res.json(validation);
+            })
+    });
+
     // get customer
     app.get('/api/customer/:customer_id', function (req, res) {
         CustomerService.get({

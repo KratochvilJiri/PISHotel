@@ -1,8 +1,34 @@
 ﻿customers
 .controller('CustomersListController', ['$scope', 'CustomerService', function ($scope, CustomerService) {
+    $scope.filter = "";
+    $scope.customers = [];
+
+    $scope.$watch('filter', function (value) {
+        if (value)
+            loadCustomers();
+    });
+
     // getAll customers - every page-load
     var loadCustomers = function () {
-        CustomerService.getAll()
+        CustomerService.getFiltered({
+            filter: {
+                $or: [
+                    {
+                        name: {
+                            "$regex": $scope.filter,
+                            "$options": "i"
+                        }
+                    },
+                    {
+                        ID: {
+                            "$regex": $scope.filter,
+                            "$options": "i"
+                        }
+                    }
+                ]
+            },
+            limit: 0
+        })
         .success(function (data, status, headers, config) {
             if (data.isValid)
                 $scope.customers = data.data;

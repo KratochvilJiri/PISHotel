@@ -108,6 +108,45 @@ module.exports = {
             return;
         });
     },
+    // Get filtered list
+    getFilteredList: function (filter, limit, select, populate, callback) {
+        // Init validation
+        var validation = new ValidationResult([]);
+
+        // Prepare query
+        var query = CustomerModel.find(filter);
+
+        // Check for select
+        if (select && select.length > 0) {
+            query.select(select.join(" "));
+        }
+
+        // Check for populate
+        if (populate && populate.length > 0) {
+            query.populate(populate.join(" "));
+        }
+
+        // Check for limit
+        if (limit > 0) {
+            query.limit(limit);
+        }
+
+        // Execute query
+        query.exec(function (err, result) {
+            // Something went wrong
+            if (err) {
+                validation.addError("Nezdařilo se získat seznam zákazníků");
+                callback(validation);
+                return;
+            }
+
+            // Set data
+            validation.data = result;
+
+            // Return validation
+            callback(validation);
+        });
+    },
     // Get customer
     get: function (customer, callback) {
         // Init validation
