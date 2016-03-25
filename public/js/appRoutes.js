@@ -19,7 +19,8 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state('home.dashboard', {
             url: '',
-            templateUrl: 'views/dashboard.html'
+            templateUrl: 'views/dashboard.html',
+            controller: 'DashboardController'
         })
         .state('home.profile', {
             url: 'profile',

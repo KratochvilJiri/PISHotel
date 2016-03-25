@@ -1,16 +1,48 @@
-<h2>Dashboard</h2>
+<div class="ui grid">
+    <div class="row">
+        <div class="eight wide column">
+            <a class="ui button BGOrange fullWidth fontWhite" ui-sref="home.reservations.new">
+                <i class="plus icon"></i>
+                Nová rezervace pokoje
+            </a>
+        </div>
+        <div class="eight wide column">
+            <a class="ui button fontWhite fullWidth BGOrange" ui-sref="home.customers.new">
+                <i class="plus icon"></i>
+                Nový zákazník
+            </a>
+        </div>
+    </div>
+</div>
 
-<div class="ui top attached tabular menu">
-    <a class="item active" data-tab="first">First</a>
-    <a class="item" data-tab="second">Second</a>
-    <a class="item" data-tab="third">Third</a>
+<!-- START all reservations table -->
+<div class="ui attached message">
+    <div class="header">
+        Aktuální rezervace
+    </div>
 </div>
-<div class="ui bottom attached tab segment active" data-tab="first">
-    First
-</div>
-<div class="ui bottom attached tab segment" data-tab="second">
-    Second
-</div>
-<div class="ui bottom attached tab segment" data-tab="third">
-    Third
-</div>
+<table class="ui celled attached striped table">
+    <thead>
+        <tr>
+            <th>Pokoj</th>
+            <th>Datum</th>
+            <th colspan="2">Zákazník</th>
+        </tr>
+    </thead>
+    <tbody ng-repeat="reservation in reservations">
+        <tr>
+            <td>{{reservation.room.ID}}</td>
+            <td>{{reservation.dateFrom | date }} - {{reservation.dateTo | date}}</td>
+            <td>{{reservation.customer.name}}</td>
+            <td>
+                <a class="ui basic button" ng-click="remove(reservation._id)">
+                    <i class="remove red icon"></i> Smazat
+                </a>
+                <a class="ui basic button" ui-sref="home.reservations.detail({reservationId: reservation._id})">
+                    <i class="write icon"></i> Editovat
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- END all reservations table -->

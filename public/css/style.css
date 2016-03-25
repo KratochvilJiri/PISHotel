@@ -151,6 +151,10 @@ tbody tr td:last-child {
 	max-width: 30em;
 }
 
+.fullWidth {
+    width: 100%;
+}
+
 a.whiteLink {
 	color: white;
 }
