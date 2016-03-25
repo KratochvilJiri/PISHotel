@@ -2,7 +2,7 @@
 var UserModel = require('./../models/UserModel');
 var ValidationResult = require('./../models/ValidationResultStructure'); 
 
-module.exports = {
+var UserService = {
     // Save user
     save: function (user, callback) {
         // Validate user before saving
@@ -167,5 +167,28 @@ module.exports = {
             // Call user callback
             callback(validation);
         });
+    },
+    // Initialize db with superuser
+    _init: function (user) {
+        // First check if user does not already exist
+        UserModel.count({
+            login: user.login
+        }, function (err, count) {
+            if (err)
+                console.log(err);
+
+            // Admin is already there, so keep going
+            if (count > 0)
+                return;
+
+            // Save user
+            UserService.save(user, function (validation) {
+                if (!validation.isValid)
+                    console.log(validation.errors);
+            });
+        });
     }
 }
+
+// Export object
+module.exports = UserService;

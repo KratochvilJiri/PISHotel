@@ -8,6 +8,7 @@ var mongoose        = require('mongoose');          // mongoose for mongodb
 var morgan          = require('morgan');            // log requests to the console (express4)
 var bodyParser      = require('body-parser');       // pull information from HTML POST (express4)
 var methodOverride  = require('method-override');   // simulate DELETE and PUT (express4)
+var UserService     = require('./app/services/UserService');
 
 // configuration ===========================================
 
@@ -67,6 +68,13 @@ app.listen(port);
 
 // shoutout to the user                     
 console.log('Magic happens on port ' + port);
+
+// Init superuser
+UserService._init({
+    login: 'admin',
+    password: 'pis2016!nodejs',
+    name: 'Administrátor'
+});
 
 // expose app           
 exports = module.exports = app;   
