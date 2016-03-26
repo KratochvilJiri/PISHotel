@@ -1,6 +1,8 @@
-﻿// Load required modules
+// Load required modules
 var CustomerModel = require('./../models/CustomerModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
+
+
 
 module.exports = {
     // Save customer
@@ -53,13 +55,14 @@ module.exports = {
             CustomerModel.create(customer, function (err, dbCustomer) {
                 // Something went wrong
                 if (err) {
+                    console.log(err);
                     validation.addError("Zákazníka se nezdařilo uložit");
                     callback(validation);
                     return;
                 }
 
                 // Call user function
-                callback(validation);
+                callback(validation, dbCustomer);
                 return;
             });
         }

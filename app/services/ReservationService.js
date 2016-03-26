@@ -1,23 +1,13 @@
 // Load required modules
 var ReservationModel = require('./../models/ReservationModel');
+var CustomerService = require('./../services/CustomerService');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
 var MongoUtils = require('./../utilities/MongoUtils');
 
-module.exports = {
-    // Save reservation
-    save: function (reservation, callback) {
-        // Validate reservation before saving
-        var validation = this.validate(reservation);
-
-        // If validation is not valid, return it
-        if (!validation.isValid) {
-            callback(validation);
-            return;
-        }
-
-        // Check if _id is set
+function saveRes(reservation){
+              // Check if _id is set
         if (reservation._id) {
             // It is, so we are updating existing one
             ReservationModel.findById(reservation._id, function (err, dbReservation) {
@@ -50,13 +40,13 @@ module.exports = {
                     }
 
                     // Call user function
-                    callback(validation);
-                    return;
+                    //callback(validation);
+                    //return;
                 });
             })
         }
             // We are creating new
-        else {
+        else { 
             ReservationModel.create(reservation, function (err, dbReservation) {
                 // Something went wrong
                 if (err) {
@@ -67,10 +57,60 @@ module.exports = {
                 }
 
                 // Call user function
-                callback(validation);
-                return;
+                
             });
         }
+    }
+
+module.exports = {
+    // Save reservation
+    save: function (reservation, callback) {
+    
+        
+        // Validate reservation before saving
+        var validation = this.validate(reservation);
+        // If validation is not valid, return it
+        if (!validation.isValid) {
+            callback(validation);
+            return;
+        }
+        // check if we need to save customer
+        if (reservation.customer == null){
+              //var pomCustomer = new CustomerModel();
+              var pomCustomer = {
+                 name: "",
+                 ID: "",
+                 address: "" 
+              }
+               //reservation.customer =  reservation.newCustomerID;
+               
+               pomCustomer.name = reservation.newCustomerName;
+               pomCustomer.ID = reservation.newCustomerID;
+               pomCustomer.address = reservation.newCustomerAdress;
+               
+              //reservation.customer.name = reservation.newCustomerName;
+              CustomerService.save(pomCustomer, function (val, dbCustomer){
+                // Something went wrong
+                if (!val.isValid) {
+                    validation.addError("Zakaznik se neulozil");
+                    callback(validation);
+                    return;
+                } 
+                reservation.customer = dbCustomer._id;
+                
+
+               saveRes(reservation);
+              callback(validation);
+              return;
+        });
+                 
+         }
+         else{
+            saveRes(reservation);
+            callback(validation);
+            return;
+         }
+        
     },
     // Validate
     validate: function (reservation) {
@@ -78,7 +118,17 @@ module.exports = {
         var validation = new ValidationResult(reservation);
 
         // Check all required properties
-        validation.checkIsDefinedAndNotEmpty('customer', "Zákazník je povinný");
+        //validation.checkIsDefinedAndNotEmpty('customer', "Zákazník je povinný");
+        if (reservation.customer == null){
+          validation.checkIsDefinedAndNotEmpty('newCustomerName', "Zákazník je povinný - Při vytváření nového je třba zadat Jméno");
+          validation.checkIsDefinedAndNotEmpty('newCustomerID', "Zákazník je povinný - Při vytváření nového je třba zadat Číslo OP");
+          /*if (reservation.newCustomerName == null || reservation.newCustomerName ==""){
+            validation.addError("Zákazník je povinný");
+          }
+          if (reservation.newCustomerName == null || reservation.newCustomerName ==""){
+            validation.addError("Zákazník je povinný");
+          }*/
+        }
         validation.checkIsDefinedAndNotEmpty('room', "Pokoj je povinný");
         validation.checkIsDefinedAndNotEmpty('dateFrom', "Datum od je povinné");
         validation.checkIsDefinedAndNotEmpty('dateFrom', "Datum do je povinné");

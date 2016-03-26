@@ -1,17 +1,17 @@
-﻿<!-- new user form -->
+<!-- new user form -->
 
 <div class="ui attached message">
     <div class="header">
         Rezervace
     </div>
 </div>
-<form class="ui form attached fluid segment">
+<form class="ui form attached fluid segment" ng-init="disNewCust = false">
     <div class="field">
         <div class="ui floating labeled icon dropdown button">
             <i class="user icon"></i>
             <span class="text">Volba zákazníka</span>
             <div class="menu">
-                <div class="item">
+                <div class="item" ng-click="disNewCust = true">
                     <i class="add user icon"></i>
                     Vytvořit nového zákazníka
                 </div>
@@ -29,6 +29,24 @@
             </div>
         </div>
     </div>
+    <div ng-if="disNewCust">
+       <div class="two fields">
+       <div class="field">
+         <label>Jméno</label>
+            <input placeholder="Jméno" type="text" ng-model="reservation.newCustomerName">
+        </div>
+        <div class="field">
+            <label>Číslo OP</label>
+            <input placeholder="Číslo OP" type="text" ng-model="reservation.newCustomerID">
+        </div>
+      </div>
+      <div class="field">
+        <label>Adresa</label>
+        <textarea rows="4" ng-model="reservation.newCustomerAdress"></textarea>
+      </div>
+      <br/>
+      </div>
+
     <div class="two fields">
         <div class="field">
             <label>Počet dospělých</label>
