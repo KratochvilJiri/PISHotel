@@ -27,8 +27,7 @@ module.exports = {
 
                 // Update service and save it
                 dbService.name = service.name;
-                dbService.address = service.address;
-                dbService.ID = service.ID;
+                dbService.price = service.price;
 
                 // If contact is set, change it
                 if (service.contact)
