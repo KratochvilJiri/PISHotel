@@ -16,6 +16,8 @@
         pensionAdults: 0,
         pensionChildren: 0
     };
+    
+    console.log($scope.reservation);
 
     // Load reservation if id is set
     if ($stateParams.reservationId) {
@@ -59,6 +61,26 @@
         $scope.calculation.overall = $scope.calculation.room + $scope.calculation.pensionAdults;
         $scope.calculation.overall += $scope.calculation.pensionChildren + services;
     }
+    
+    
+    // change reservation state
+    $scope.reservationStateChanged = function (reservationState){
+        $scope.reservation.state = reservationState;
+        console.log($scope.reservation);
+        ReservationService.save($scope.reservation)
+		.success(function (data, status, headers, config) {
+		    if (data.isValid) {
+		        $state.go('home.reservations.rooms');
+		    }
+		    else {
+		        $scope.showError(data.errors);
+		    }
+		})
+		.error(function (data, status) {
+		    console.error('Error', status, data);
+		});
+    }     
+        
         
     // Watch for reservation change
     $scope.$watch('reservation', function (newVal, oldVal) {
@@ -111,6 +133,9 @@
 
     // Save reservation
     $scope.save = function () {
+        // new reservation --> state = CREATED
+        if(!$scope.reservation._id)
+            $scope.reservation.state = 0;
         ReservationService.save($scope.reservation)
 		.success(function (data, status, headers, config) {
 		    if (data.isValid) {

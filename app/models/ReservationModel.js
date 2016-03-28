@@ -28,6 +28,10 @@ module.exports = mongoose.model('Reservation', {
         type: Date,
         required: true
     },
+    state: {
+        type: typeStructure,
+        required: true
+    },
     // SERVICES
     services: [reservationServiceStructure],
     // PENSION TYPE

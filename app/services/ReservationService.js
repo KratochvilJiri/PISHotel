@@ -4,9 +4,25 @@ var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
 
-module.exports = {
+ReservationService = {
+
+    // check reservation state transition
+    checkStateTransition: function(newState, oldState) {
+        // created --> confirmdr/cancelled  
+        if (oldState == 0 && (newState == 1 || newState == 2)) {
+            return true;
+        }
+
+        // confirmed --> paid   
+        else if (oldState == 1 && newState == 3) {
+            return true;
+        }
+        // error    
+        return false;
+    },
+
     // Save reservation
-    save: function (reservation, callback) {
+    save: function(reservation, callback) {
         // Validate reservation before saving
         var validation = this.validate(reservation);
 
@@ -19,7 +35,7 @@ module.exports = {
         // Check if _id is set
         if (reservation._id) {
             // It is, so we are updating existing one
-            ReservationModel.findById(reservation._id, function (err, dbReservation) {
+            ReservationModel.findById(reservation._id, function(err, dbReservation) {
                 // Check for error
                 if (err) {
                     validation.addError("Rezervaci se nezdařilo nalézt v databázi");
@@ -27,7 +43,16 @@ module.exports = {
                     return;
                 }
 
+                // state transition error
+                if (!ReservationService.checkStateTransition(reservation.state, dbReservation.state)) {
+                    validation.addError("Rezervaci se nezdařilo uložit - neplatný přechod mezi stavy");
+                    callback(validation);
+                    return;
+                }
+
+
                 // Update reservation and save it
+                dbReservation.state = reservation.state;
                 dbReservation.customer = reservation.customer;
                 dbReservation.paymentType = reservation.paymentType;
                 dbReservation.pensionType = reservation.pensionType;
@@ -41,7 +66,7 @@ module.exports = {
                 dbReservation.services = reservation.services;
 
                 // Save reservation
-                dbReservation.save(function (err) {
+                dbReservation.save(function(err) {
                     if (err) {
                         validation.addError("Rezervaci se nezdařilo uložit");
                         callback(validation);
@@ -54,9 +79,9 @@ module.exports = {
                 });
             })
         }
-            // We are creating new
+        // We are creating new
         else {
-            ReservationModel.create(reservation, function (err, dbReservation) {
+            ReservationModel.create(reservation, function(err, dbReservation) {
                 // Something went wrong
                 if (err) {
                     validation.addError("Rezervaci se nezdařilo uložit");
@@ -71,8 +96,9 @@ module.exports = {
             });
         }
     },
+
     // Validate
-    validate: function (reservation) {
+    validate: function(reservation) {
         // Init validation
         var validation = new ValidationResult(reservation);
 
@@ -88,7 +114,7 @@ module.exports = {
         return validation;
     },
     // Get pension types
-    getPensionTypes: function (callback) {
+    getPensionTypes: function(callback) {
         // Init validation
         var validation = new ValidationResult(PensionTypes.get());
         // And return it
@@ -96,7 +122,7 @@ module.exports = {
 
     },
     // Get payment types
-    getPaymentTypes: function (callback) {
+    getPaymentTypes: function(callback) {
         // Init validation
         var validation = new ValidationResult(PaymentTypes.get());
         // And return it
@@ -104,7 +130,7 @@ module.exports = {
 
     },
     // Get filtered list
-    getFilteredList: function (filter, limit, select, populate, callback) {
+    getFilteredList: function(filter, limit, select, populate, callback) {
         // Init validation
         var validation = new ValidationResult([]);
 
@@ -127,7 +153,7 @@ module.exports = {
         }
 
         // Execute query
-        query.exec(function (err, result) {
+        query.exec(function(err, result) {
             // Something went wrong
             if (err) {
                 validation.addError("Nezdařilo se získat seznam rezervací");
@@ -143,12 +169,12 @@ module.exports = {
         });
     },
     // Get list of reservations
-    getList: function (callback) {
+    getList: function(callback) {
         // Init validation
         var validation = new ValidationResult([]);
 
         // Find all of them
-        ReservationModel.find().populate('room customer').exec(function (err, reservations) {
+        ReservationModel.find().populate('room customer').exec(function(err, reservations) {
             // Something went wrong
             if (err) {
                 validation.addError("Nezdařilo se získat seznam rezervací");
@@ -165,7 +191,7 @@ module.exports = {
         });
     },
     // Get reservation
-    get: function (reservation, callback) {
+    get: function(reservation, callback) {
         // Init validation
         var validation = new ValidationResult(reservation);
 
@@ -176,7 +202,7 @@ module.exports = {
         }
 
         // Load reservation
-        ReservationModel.findById(reservation._id).populate('services.service room customer').exec(function (err, dbReservation) {
+        ReservationModel.findById(reservation._id).populate('services.service room customer').exec(function(err, dbReservation) {
             // Check for error
             if (err) {
                 validation.addError("Rezervaci se nezdařilo nalézt v databázi");
@@ -191,7 +217,7 @@ module.exports = {
         })
     },
     // Remove reservation
-    remove: function (reservation, callback) {
+    remove: function(reservation, callback) {
         // Init validation
         var validation = new ValidationResult(reservation);
 
@@ -202,9 +228,9 @@ module.exports = {
             return;
         }
 
-         
+
         // Remove reservation
-        ReservationModel.remove(reservation, function (err, dbReservation) {
+        ReservationModel.remove(reservation, function(err, dbReservation) {
             // Something went wrong
             if (err) {
                 validation.addError("Nezdařilo se odebrat rezervaci");
@@ -217,3 +243,6 @@ module.exports = {
         });
     }
 }
+
+// Export object
+module.exports = ReservationService;

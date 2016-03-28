@@ -12,8 +12,7 @@
             <span class="text">Volba zákazníka</span>
             <div class="menu">
                 <div class="item">
-                    <i class="add user icon"></i>
-                    Vytvořit nového zákazníka
+                    <i class="add user icon"></i> Vytvořit nového zákazníka
                 </div>
                 <div class="divider"></div>
                 <div class="header">
@@ -51,14 +50,16 @@
     </div>
     <div class="field">
         <label>Pokoj</label>
-        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms track by item._id" ng-model="reservation.room">
+        <select ng-options="(item.ID + ' ' + item.roomType.name + ' za ' + item.price + 'CZK') for item in rooms track by item._id"
+        ng-model="reservation.room">
             <option disabled value="">Vyberte pokoj</option>
         </select>
     </div>
     <div class="two fields">
         <div class="field">
             <label>Typ penze</label>
-            <select ng-options="(item.name + ' za ' + item.value + 'CZK') for item in pensionTypes track by item.code" class="ui dropdown" ng-model="reservation.pensionType">
+            <select ng-options="(item.name + ' za ' + item.value + 'CZK') for item in pensionTypes track by item.code" class="ui dropdown"
+            ng-model="reservation.pensionType">
                 <option value="">Vyberte penzi</option>
             </select>
         </div>
@@ -175,8 +176,15 @@
 </table>
 <div class="ui bottom attached message">
     <a ng-click="save()" class="ui button fontWhite BGOrange">
-        <i class="save icon"></i>
-        Uložit
+        <i class="save icon"></i> Uložit
+    </a>
+    <a ng-click="reservationStateChanged(1)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 0">
+        <i class="check circle outline icon"></i> Potvrdit
+    </a>
+    <a ng-click="reservationStateChanged(2)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 0">
+        <i class="remove circle icon"></i> Stornovat
+    </a>
+    <a ng-click="reservationStateChanged(3)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 1">
+        <i class="dollar icon"></i> Potvrdit platbu
     </a>
 </div>
-

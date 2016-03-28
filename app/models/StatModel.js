@@ -19,10 +19,9 @@ module.exports = {
     // Reservation state
     ReservationState: {
         CREATED: 0,
-        DEPOSIT_PAID: 1,
+        CONFIRMED: 1,
         CANCELED: 2,
-        FINISHED: 3,
-        PROCEEDING: 4
+        COMPLETED: 3
     },
     // Contact type
     ContactType: {
