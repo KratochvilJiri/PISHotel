@@ -1,4 +1,4 @@
-Ôªø<!-- new user form -->
+<!-- new user form -->
 
 <div class="ui attached message">
     <div class="header">
@@ -9,14 +9,14 @@
     <div class="field">
         <div class="ui floating labeled icon dropdown button">
             <i class="user icon"></i>
-            <span class="text">Volba z√°kazn√≠ka</span>
+            <span class="text">Volba z·kaznÌka</span>
             <div class="menu">
                 <div class="item">
-                    <i class="add user icon"></i> Vytvo≈ôit nov√©ho z√°kazn√≠ka
+                    <i class="add user icon"></i> Vytvorit novÈho z·kaznÌka
                 </div>
                 <div class="divider"></div>
                 <div class="header">
-                    Vyhledat z√°kazn√≠ka
+                    Vyhledat z·kaznÌka
                 </div>
                 <div class="ui left icon input">
                     <i class="search icon"></i>
@@ -30,17 +30,17 @@
     </div>
     <div class="two fields">
         <div class="field">
-            <label>Poƒçet dospƒõl√Ωch</label>
-            <input placeholder="Poƒçet dospƒõl√Ωch" type="number" ng-model="reservation.numberOfAdults">
+            <label>Pocet dospel˝ch</label>
+            <input placeholder="Pocet dospel˝ch" type="number" ng-model="reservation.numberOfAdults">
         </div>
         <div class="field">
-            <label>Poƒçet dƒõt√≠</label>
-            <input placeholder="Poƒçet dƒõt√≠" type="number" ng-model="reservation.numberOfChildren">
+            <label>Pocet detÌ</label>
+            <input placeholder="Pocet detÌ" type="number" ng-model="reservation.numberOfChildren">
         </div>
     </div>
     <div class="two fields">
         <div class="field">
-            <label>Datum zaƒç√°tku pobytu</label>
+            <label>Datum zac·tku pobytu</label>
             <input type="date" ng-model="reservation.dateFrom" format-date>
         </div>
         <div class="field">
@@ -64,23 +64,23 @@
             </select>
         </div>
         <div class="field">
-            <label>Zp≈Øsob platby</label>
+            <label>Zpusob platby</label>
             <select ng-options="item.name for item in paymentTypes track by item.code" class="ui dropdown" ng-model="reservation.paymentType">
-                <option value="">Vyberte zp≈Øsob platby</option>
+                <option value="">Vyberte zpusob platby</option>
             </select>
         </div>
     </div>
 </form>
 <div class="ui attached message">
     <div class="header">
-        Slu≈æby
+        Sluûby
     </div>
 </div>
 <table class="ui celled attached striped table">
     <thead>
         <tr>
-            <th>N√°zev slu≈æby</th>
-            <th>Poƒçet</th>
+            <th>N·zev sluûby</th>
+            <th>Pocet</th>
             <th></th>
         </tr>
     </thead>
@@ -88,26 +88,26 @@
         <tr>
             <td class="editable">
                 <select ng-options="item.name for item in services" class="ui dropdown" ng-model="newReservationService.service">
-                    <option value="">Vyberte slu≈æbu</option>
+                    <option value="">Vyberte sluûbu</option>
                 </select>
             </td>
             <td class="editable">
-                <input type="number" ng-model="newReservationService.count" placeholder="Zadejte poƒçet" />
+                <input type="number" ng-model="newReservationService.count" placeholder="Zadejte pocet" />
             </td>
             <td>
                 <a class="ui basic button" ng-click="addService(newReservationService)">
-                    <i class="save icon"></i> Vlo≈æit
+                    <i class="save icon"></i> Vloûit
                 </a>
             </td>
         </tr>
         <tr ng-repeat="service in reservation.services">
             <td class="editable">
                 <select ng-options="item.name for item in services track by item._id" class="ui dropdown" ng-model="service.service">
-                    <option value="">Vyberte slu≈æbu</option>
+                    <option value="">Vyberte sluûbu</option>
                 </select>
             </td>
             <td class="editable">
-                <input type="number" ng-model="service.count" placeholder="Zadejte cenu slu≈æby" />
+                <input type="number" ng-model="service.count" placeholder="Zadejte cenu sluûby" />
             </td>
             <td>
                 <a class="ui basic button" ng-click="removeService($index)">
@@ -125,9 +125,9 @@
 <table class="ui celled attached striped table">
     <thead>
         <tr>
-            <th>Obecn√©</th>
-            <th>Poƒçet</th>
-            <th>Cena za polo≈æku</th>
+            <th>ObecnÈ</th>
+            <th>Pocet</th>
+            <th>Cena za poloûku</th>
             <th>Suma</th>
         </tr>
     </thead>
@@ -139,13 +139,13 @@
             <td>{{calculation.room}}</td>
         </tr>
         <tr ng-if="reservation.pensionType">
-            <td>Stravov√°n√≠ dospƒõl√≠</td>
+            <td>Stravov·nÌ dospelÌ</td>
             <td>{{calculation.numberOfDays * reservation.numberOfAdults}}</td>
             <td>{{reservation.pensionType.value}}</td>
             <td>{{calculation.pensionAdults}}</td>
         </tr>
         <tr ng-if="reservation.pensionType">
-            <td>Stravov√°n√≠ dƒõti</td>
+            <td>Stravov·nÌ deti</td>
             <td>{{calculation.numberOfDays * reservation.numberOfChildren}}</td>
             <td>{{reservation.pensionType.value}} * 0.7</td>
             <td>{{calculation.pensionChildren}}</td>
@@ -153,9 +153,9 @@
     </tbody>
     <thead>
         <tr>
-            <th>Slu≈æby</th>
-            <th>Poƒçet</th>
-            <th>Cena za polo≈æku</th>
+            <th>Sluûby</th>
+            <th>Pocet</th>
+            <th>Cena za poloûku</th>
             <th>Suma</th>
         </tr>
     </thead>
@@ -176,7 +176,7 @@
 </table>
 <div class="ui bottom attached message">
     <a ng-click="save()" class="ui button fontWhite BGOrange">
-        <i class="save icon"></i> Ulo≈æit
+        <i class="save icon"></i> Uloûit
     </a>
     <a ng-click="reservationStateChanged(1)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 0">
         <i class="check circle outline icon"></i> Potvrdit
