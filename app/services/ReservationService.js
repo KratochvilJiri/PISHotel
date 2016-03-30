@@ -3,18 +3,23 @@ var ReservationModel = require('./../models/ReservationModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
+var ReservationState = require('../models/StatModel').ReservationState;
 
 ReservationService = {
 
     // check reservation state transition
-    checkStateTransition: function(newState, oldState) {
+    checkStateTransition: function (newState, oldState) {
+        // Allow to update reservation
+        if (newState == oldState)
+            return true;
+
         // created --> confirmdr/cancelled  
-        if (oldState == 0 && (newState == 1 || newState == 2)) {
+        if (oldState == ReservationState.CREATED && (newState == ReservationState.CONFIRMED || newState == ReservationState.CANCELED)) {
             return true;
         }
 
         // confirmed --> paid   
-        else if (oldState == 1 && newState == 3) {
+        else if (oldState == ReservationState.CONFIRMED && newState == ReservationState.COMPLETED) {
             return true;
         }
         // error    
