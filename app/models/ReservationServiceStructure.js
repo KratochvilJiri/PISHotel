@@ -10,8 +10,16 @@ module.exports = {
         required: true
     },
     // SERVICE
-    service:    {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Service'
+    service: {
+        // NAME
+        name: {
+            type: String,
+            required: true
+        },
+        // PRICE
+        price: {
+            type: Number,
+            required: true
         }
+    }
 };

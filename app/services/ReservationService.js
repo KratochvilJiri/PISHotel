@@ -207,7 +207,7 @@ ReservationService = {
         }
 
         // Load reservation
-        ReservationModel.findById(reservation._id).populate('services.service room customer').exec(function(err, dbReservation) {
+        ReservationModel.findById(reservation._id).populate('room customer').exec(function(err, dbReservation) {
             // Check for error
             if (err) {
                 validation.addError("Rezervaci se nezdařilo nalézt v databázi");

@@ -80,7 +80,7 @@
     <thead>
         <tr>
             <th>Název služby</th>
-            <th>Pocet</th>
+            <th>Počet</th>
             <th></th>
         </tr>
     </thead>
@@ -102,9 +102,7 @@
         </tr>
         <tr ng-repeat="service in reservation.services">
             <td class="editable">
-                <select ng-options="item.name for item in services track by item._id" class="ui dropdown" ng-model="service.service">
-                    <option value="">Vyberte službu</option>
-                </select>
+                {{service.service.name}}
             </td>
             <td class="editable">
                 <input type="number" ng-model="service.count" placeholder="Zadejte počet" />
@@ -126,7 +124,7 @@
     <thead>
         <tr>
             <th>Obecné</th>
-            <th>Pocet</th>
+            <th>Počet</th>
             <th>Cena za položku</th>
             <th>Suma</th>
         </tr>
