@@ -184,6 +184,9 @@
             <i class="remove circle icon"></i> Stornovat
         </a>
         <a ng-click="reservationStateChanged(3)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 1">
+            <i class="calculator icon"></i> Kalkulovat
+        </a>
+        <a ng-click="reservationStateChanged(4)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 3">
             <i class="dollar icon"></i> Potvrdit platbu
         </a>
     </span>

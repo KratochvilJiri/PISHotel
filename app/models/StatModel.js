@@ -21,7 +21,8 @@ module.exports = {
         CREATED: 0,
         CONFIRMED: 1,
         CANCELED: 2,
-        COMPLETED: 3
+        CALCULATED: 3,
+        COMPLETED: 4
     },
     // Contact type
     ContactType: {

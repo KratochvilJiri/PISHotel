@@ -13,16 +13,44 @@ ReservationService = {
         if (newState == oldState)
             return true;
 
-        // created --> confirmdr/cancelled  
-        if (oldState == ReservationState.CREATED && (newState == ReservationState.CONFIRMED || newState == ReservationState.CANCELED)) {
-            return true;
+        // Check old state
+        switch (oldState) {
+            // CREATED
+            case ReservationState.CREATED:
+                // -> CONFIRMED
+                if (newState == ReservationState.CONFIRMED)
+                    return true;
+                // -> CANCELED
+                else if (ewState == ReservationState.CANCELED)
+                    return true
+                
+                // None
+                break;
+
+            // CONFIRMED
+            case ReservationState.CONFIRMED:
+                // -> CALCULATED
+                if (newState == ReservationState.CALCULATED)
+                    return true;
+
+                // None
+                break;
+
+            // CALCULATED
+            case ReservationState.CALCULATED:
+                // -> COMPLETED
+                if (newState == ReservationState.COMPLETED)
+                    return true;
+
+                // None
+                break;
+
+            // Default
+            default:
+                break;
         }
 
-        // confirmed --> paid   
-        else if (oldState == ReservationState.CONFIRMED && newState == ReservationState.COMPLETED) {
-            return true;
-        }
-        // error    
+        // Invalid transition    
         return false;
     },
 
@@ -67,7 +95,7 @@ ReservationService = {
                 dbReservation.numberOfAdults = reservation.numberOfAdults;
                 dbReservation.numberOfChildren = reservation.numberOfChildren;
 
-                // If premises is set, update it
+                // If services are set, update it
                 dbReservation.services = reservation.services;
 
                 // Save reservation

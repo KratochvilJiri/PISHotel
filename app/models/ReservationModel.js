@@ -1,6 +1,7 @@
 ﻿var mongoose = require('mongoose');
 var typeStructure = require('./TypeStructure');
 var reservationServiceStructure = require('./ReservationServiceStructure');
+var calculationStructure = require('./CalculationStructure');
 
 //
 // Reservation model
@@ -53,5 +54,10 @@ module.exports = mongoose.model('Reservation', {
     paymentType: {
         type: typeStructure,
         required: true
+    },
+    // CALCULATION
+    calculation: {
+        type: calculationStructure,
+        required: false
     }
 });
