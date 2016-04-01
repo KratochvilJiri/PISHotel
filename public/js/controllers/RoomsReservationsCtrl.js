@@ -1,10 +1,37 @@
 ﻿reservations.controller('RoomsReservationsController', ['$scope', 'ReservationService', function ($scope, ReservationService) {
     // Init variables
     $scope.reservations = [];
+    $scope.states = StatUtility.Reservation.getStates();
+    $scope.filter = {
+        states: []
+    }
 
-    // getAll reservations - every page-load
+    // Load reservations after filter change
+    $scope.$watch('filter', function (filter) {
+        if (!filter)
+            return;
+
+        loadReservations();
+    }, true);
+
+    // get reservations - every page-load
     var loadReservations = function () {
-        ReservationService.getAll().success(function (data) {
+        // Init filter object
+        var filterObject = {
+            filter: {
+            },
+            populate: ['room', 'customer'],
+            limit: 0
+        };
+
+        // If states is set, use it
+        if ($scope.filter.states.length > 0) {
+            filterObject.filter.state = {
+                $in: $scope.filter.states
+            }
+        }
+
+        ReservationService.getFiltered(filterObject).success(function (data) {
             if (data.isValid)
                 $scope.reservations = data.data;
             else
@@ -24,6 +51,10 @@
         });
     }
 
+    // Get string for state
+    $scope.stateToString = function (state) {
+        return StatUtility.Reservation.toString(state);
+    }
 
     // Load reservations
     loadReservations();

@@ -1,4 +1,44 @@
 ﻿var StatUtility = {
+    Reservation: {
+        toString: function (state) {
+            switch (state) {
+                case 0:
+                    return "Vytvořeno";
+                case 1:
+                    return "Potvrzeno";
+                case 2:
+                    return "Zrušeno";
+                case 3:
+                    return "Kalkulováno";
+                case 4:
+                    return "Uzavřeno";
+            }
+        },
+        getStates: function () {
+            return [
+                {
+                    id: 0,
+                    name: this.toString(0)
+                },
+                {
+                    id: 1,
+                    name: this.toString(1)
+                },
+                {
+                    id: 2,
+                    name: this.toString(2)
+                },
+                {
+                    id: 3,
+                    name: this.toString(3)
+                },
+                {
+                    id: 4,
+                    name: this.toString(4)
+                }
+            ]
+        }
+    },
     Security: {
         roleToString: function (role) {
             switch (role) {

@@ -6,11 +6,14 @@
                 Nová rezervace pokoje
             </a>
         </div>
-        <div class="ten wide column">
-            <p></p>
+        <div class="eight wide column">
         </div>
-        <div class="three wide column">
-            <img>
+        <div class="five wide column">
+            <div class="field">
+                <select class="ui fluid search dropdown" ng-model="filter.states" ng-options="state.id as state.name for state in states" multiple>
+                    <option value="">Filtrování podle stavu</option>
+                </select>
+            </div>
         </div>
     </div>
 </div>
@@ -25,6 +28,7 @@
                         <th>Pokoj</th>
                         <th>Datum</th>
                         <th>Zákazník</th>
+                        <th>Stav</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -33,6 +37,7 @@
                         <td>{{reservation.room.ID}}</td>
                         <td>{{reservation.dateFrom | date }} - {{reservation.dateTo | date}}</td>
                         <td>{{reservation.customer.name}}</td>
+                        <td>{{stateToString(reservation.state)}}</td>
                         <td>
                             <a class="ui basic button" ng-click="remove(reservation._id)">
                                 <i class="remove red icon"></i> Smazat
