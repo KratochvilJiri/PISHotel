@@ -99,6 +99,7 @@
         <tr>
             <th>Název služby</th>
             <th>Počet</th>
+            <th>Cena za položku</th>
             <th></th>
         </tr>
     </thead>
@@ -112,6 +113,7 @@
             <td class="editable">
                 <input type="number" ng-model="newReservationService.count" placeholder="Zadejte počet" />
             </td>
+            <td></td>
             <td>
                 <a class="ui basic button" ng-click="addService(newReservationService)">
                     <i class="save icon"></i> Vložit
@@ -124,6 +126,9 @@
             </td>
             <td class="editable">
                 <input type="number" ng-model="service.count" placeholder="Zadejte počet" />
+            </td>
+            <td>
+                {{service.service.price}} CZK
             </td>
             <td>
                 <a class="ui basic button" ng-click="removeService($index)">
@@ -152,11 +157,11 @@
             <td>{{item.name}}</td>
             <td>{{item.count}}</td>
             <td>{{item.price}}</td>
-            <td class="align-right">{{item.sum}}</td>
+            <td class="align-right">{{item.sum}} CZK</td>
         </tr>
         <tr>
             <td class="bold" colspan="3">Celkem</td>
-            <td class="bold align-right">{{item.sum}}</td>
+            <td class="bold align-right">{{item.sum}} CZK</td>
         </tr>
     </tbody>
 </table>
