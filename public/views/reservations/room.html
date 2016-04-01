@@ -11,8 +11,8 @@
             <i class="user icon"></i>
             <span class="text">Volba zákazníka</span>
             <div class="menu">
-                <div class="item">
-                    <i class="add user icon"></i> Vytvorit nového zákazníka
+                <div class="item"  ng-click="disNewCust = true">
+                    <i class="add user icon"></i> Vytvořit nového zákazníka
                 </div>
                 <div class="divider"></div>
                 <div class="header">
@@ -28,6 +28,23 @@
             </div>
         </div>
     </div>
+    <div ng-if="disNewCust">
+       <div class="two fields">
+       <div class="field">
+         <label>Jméno</label>
+            <input placeholder="Jméno" type="text" ng-model="reservation.newCustomerName">
+        </div>
+        <div class="field">
+            <label>Číslo OP</label>
+            <input placeholder="Číslo OP" type="text" ng-model="reservation.newCustomerID">
+        </div>
+      </div>
+      <div class="field">
+        <label>Adresa</label>
+        <textarea rows="4" ng-model="reservation.newCustomerAdress"></textarea>
+      </div>
+      <br/>
+      </div>
     <div class="two fields">
         <div class="field">
             <label>Počet dospelých</label>
