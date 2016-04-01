@@ -123,7 +123,7 @@ ReservationService = {
             return;
         }
         // check if we need to save customer
-        if (reservation.customer == null){
+        if (reservation.disNewCust == true){
               //var pomCustomer = new CustomerModel();
               var pomCustomer = {
                  name: "",
