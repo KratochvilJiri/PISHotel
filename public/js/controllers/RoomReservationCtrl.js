@@ -52,9 +52,6 @@
         if (newVal.dateFrom > newVal.dateTo)
             return;
 
-        // Calculate overal price
-        calculate();
-
         // Check if value changed
         if (newVal.dateFrom == oldVal.dateFrom && newVal.dateTo == oldVal.dateTo)
             return;
