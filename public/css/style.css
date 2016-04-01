@@ -21,6 +21,14 @@ div.app-content {
     padding-bottom: 5rem;
 }
 
+table.calculation tr td:last-child {
+    text-align: right;
+}
+
+table.calculation tr:last-child td {
+    font-weight: bold;
+}
+
 .ui.navbar {
 	width: 100%;
     border-radius: 0rem;
