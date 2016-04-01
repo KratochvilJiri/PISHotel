@@ -10,7 +10,7 @@ module.exports = function (app) {
 
     // Deauthorize user
     app.get("/api/authorization/deauthorize", function (req, res) {
-        AuthorizationService.authorize(req.session, function (validation) {
+        AuthorizationService.deauthorize(req.session, function (validation) {
             res.json(validation);
         });
     });
