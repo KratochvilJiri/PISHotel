@@ -1,5 +1,5 @@
 ﻿administrationModule
-.controller('RoomAdministrationController', ['$scope', '$state', '$stateParams', 'RoomService', 'EquipmentService', function ($scope, $state, $stateParams, RoomService, EquipmentService) {
+.controller('RoomAdministrationController', ['$scope', '$timeout', '$state', '$stateParams', 'RoomService', 'EquipmentService', function ($scope, $timeout, $state, $stateParams, RoomService, EquipmentService) {
     // init variables
     $scope.room = {};
     $scope.roomTypes = [];
@@ -66,6 +66,11 @@
             premisesType: type,
             equipment: []
         });
+
+        // Refresh semantic dropdown
+        $timeout(function () {
+            $('.ui.dropdown').dropdown();
+        }, 250);
     }
 
     // Remove premises from room
