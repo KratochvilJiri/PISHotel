@@ -20,7 +20,7 @@
                 </div>
                 <div class="ui left icon input">
                     <i class="search icon"></i>
-                    <input type="text" name="search" ng-model="customerSearch" placeholder="Search...">
+                    <input type="text" name="search" ng-model="customerSearch" placeholder="Vyhledat...">
                 </div>
                 <div ng-click="setCustomer(customer)" ng-repeat="customer in customers | filter:customerSearch | limitTo:9" class="item">
                     {{customerToString(customer)}}
@@ -67,11 +67,23 @@
         </div>
     </div>
     <div class="field">
-        <label>Pokoj</label>
-        <select ng-options="(item.ID + ' ' + item.roomType.name) for item in rooms track by item._id"
-        ng-model="reservation.room">
-            <option disabled value="">Vyberte pokoj</option>
-        </select>
+        <div class="ui floating labeled basic icon dropdown button">
+            <i class="list icon"></i>
+            <span ng-if="!reservation.room" class="text">Volba pokoje</span>
+            <span ng-if="reservation.room">{{roomToString(reservation.room)}}</span>
+            <div class="menu">
+                <div class="header">
+                    Vyhledat pokoj
+                </div>
+                <div class="ui left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" name="search" ng-model="roomSearch" placeholder="Vyhledat...">
+                </div>
+                <div ng-click="setRoom(room)" ng-repeat="room in rooms | filter:roomSearch | limitTo:9" class="item">
+                    {{roomToString(room)}} za {{room.price}} CZK
+                </div>
+            </div>
+        </div>
     </div>
     <div class="two fields">
         <div class="field">

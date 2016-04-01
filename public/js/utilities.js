@@ -68,6 +68,11 @@
             return customer.name + " " + customer.ID;
         }
     },
+    Room: {
+        toString: function (room) {
+            return room.ID + " " + room.roomType.name;
+        }
+    },
     Premises: {
         toString: function (type) {
             switch (type) {

@@ -65,6 +65,11 @@
         $scope.reservation.customer = customer;
     }
 
+    // Set room for reservation
+    $scope.setRoom = function (room) {
+        $scope.reservation.room = room;
+    }
+
     // Add service
     $scope.addService = function (service) {
         // Values have to be set
@@ -166,6 +171,11 @@
     // Customer to string
     $scope.customerToString = function (customer) {
         return StatUtility.Customer.toString(customer);
+    }
+
+    // Room to string
+    $scope.roomToString = function (room) {
+        return StatUtility.Room.toString(room);
     }
 
     // Load pension types
