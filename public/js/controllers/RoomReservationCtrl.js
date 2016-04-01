@@ -9,15 +9,6 @@
     $scope.pensionTypes = [];
     $scope.paymentTypes = [];
     $scope.newReservationService = {};
-    $scope.calculation = {
-        overall: 0,
-        numberOfDays: 0,
-        room: 0,
-        pensionAdults: 0,
-        pensionChildren: 0
-    };
-    
-    console.log($scope.reservation);
 
     // Load reservation if id is set
     if ($stateParams.reservationId) {
@@ -30,38 +21,7 @@
                 $scope.showError(data.errors);
             }
         });
-    }
-    
-    // Calculate amount to pay
-    var calculate = function () {
-        // Get number of days
-        $scope.calculation.numberOfDays = Math.round((new Date($scope.reservation.dateTo) - new Date($scope.reservation.dateFrom)) / (1000 * 60 * 60 * 24));
-        // Set price for room, if room is set
-        if ($scope.reservation.room) {
-            $scope.calculation.room = $scope.calculation.numberOfDays * $scope.reservation.room.price;
-        }
-
-        // Set price for pensions, if is set
-        if ($scope.reservation.pensionType) {
-            var base = $scope.calculation.numberOfDays * $scope.reservation.pensionType.value;
-            $scope.calculation.pensionAdults = base * $scope.reservation.numberOfAdults;
-            $scope.calculation.pensionChildren = Math.round(base * $scope.reservation.numberOfChildren * 0.7);
-        }
-
-        // Calculate services
-        var services = 0;
-        if ($scope.reservation.services) {
-            // Go through each
-            for (var index = 0; index < $scope.reservation.services.length; index++) {
-                services += $scope.reservation.services[index].count * $scope.reservation.services[index].service.price;
-            }
-        }
-
-        // Get it all together
-        $scope.calculation.overall = $scope.calculation.room + $scope.calculation.pensionAdults;
-        $scope.calculation.overall += $scope.calculation.pensionChildren + services;
-    }
-    
+    }    
     
     // change reservation state
     $scope.reservationStateChanged = function (reservationState){

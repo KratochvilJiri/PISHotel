@@ -20,9 +20,9 @@
                 </div>
                 <div class="ui left icon input">
                     <i class="search icon"></i>
-                    <input type="text" name="search" placeholder="Search...">
+                    <input type="text" name="search" ng-model="customerSearch" placeholder="Search...">
                 </div>
-                <div ng-click="setCustomer(customer)" ng-repeat="customer in customers" class="item">
+                <div ng-click="setCustomer(customer)" ng-repeat="customer in customers | filter:customerSearch | limitTo:9" class="item">
                     {{customerToString(customer)}}
                 </div>
             </div>
