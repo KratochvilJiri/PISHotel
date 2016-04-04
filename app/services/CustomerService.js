@@ -1,5 +1,6 @@
 // Load required modules
 var CustomerModel = require('./../models/CustomerModel');
+var ReservationModel = require('./../models/ReservationModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
 
 
