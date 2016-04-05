@@ -9,9 +9,10 @@
     <div class="field">
         <div class="ui floating labeled icon dropdown button">
             <i class="user icon"></i>
-            <span class="text">Volba zákazníka</span>
+            <span ng-if="!reservation.customer._id" class="text">Volba zákazníka</span>
+            <span ng-if="reservation.customer._id">{{reservation.customer.name}} {{reservation.customer.ID}}</span>
             <div class="menu">
-                <div class="item"  ng-click="reservation.disNewCust = true">
+                <div class="item" ng-click="createNewCustomer()">
                     <i class="add user icon"></i> Vytvořit nového zákazníka
                 </div>
                 <div class="divider"></div>
@@ -28,24 +29,24 @@
             </div>
         </div>
     </div>
-    
-    <fieldset class="nestForm" ng-if="reservation.disNewCust" style="border:3px solid grey; border-radius: 25px; padding: 20px; margin-bottom:15px;">
-      <legend>Nový zákazník</legend>
-       <div class="two fields">
-       <div class="field">
-         <label>Jméno</label>
-            <input placeholder="Jméno" type="text" ng-model="reservation.newCustomerName">
+    <div ng-if="newCustomer">
+        <div class="two fields">
+            <div class="field">
+                <label>Jméno</label>
+                <input placeholder="Jméno" type="text" ng-model="reservation.customer.name">
+            </div>
+            <div class="field">
+                <label>Číslo OP</label>
+                <input placeholder="Číslo OP" type="text" ng-model="reservation.customer.ID">
+            </div>
         </div>
         <div class="field">
-            <label>Číslo OP</label>
-            <input placeholder="Číslo OP" type="text" ng-model="reservation.newCustomerID">
+            <label>Adresa</label>
+            <textarea rows="4" ng-model="reservation.customer.address"></textarea>
         </div>
-      </div>
-      <div class="field">
-        <label>Adresa</label>
-        <textarea rows="4" ng-model="reservation.newCustomerAdress"></textarea>
-      </fieldset>
-      
+    </div>
+</form>
+<form class="ui form attached fluid segment">
     <div class="two fields">
         <div class="field">
             <label>Počet dospelých</label>
@@ -89,7 +90,7 @@
         <div class="field">
             <label>Typ penze</label>
             <select ng-options="(item.name + ' za ' + item.value + ' CZK') for item in pensionTypes track by item.code" class="ui dropdown"
-            ng-model="reservation.pensionType">
+                    ng-model="reservation.pensionType">
                 <option value="">Vyberte penzi</option>
             </select>
         </div>

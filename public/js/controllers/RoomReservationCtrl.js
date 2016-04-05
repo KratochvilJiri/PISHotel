@@ -9,6 +9,7 @@
     $scope.pensionTypes = [];
     $scope.paymentTypes = [];
     $scope.newReservationService = {};
+    $scope.newCustomer = false;
 
     // Load reservation if id is set
     if ($stateParams.reservationId) {
@@ -63,6 +64,13 @@
     // Set customer for reservation
     $scope.setCustomer = function (customer) {
         $scope.reservation.customer = customer;
+        $scope.newCustomer = false;
+    }
+
+    // New customer
+    $scope.createNewCustomer = function () {
+        $scope.newCustomer = true;
+        $scope.reservation.customer = {};
     }
 
     // Set room for reservation
@@ -112,7 +120,7 @@
 		});
     }
 
-    // Load customers TODO: based on filter
+    // Load customers
     var loadCustomers = function () {
         CustomerService.getAll()
         .success(function (data, status, headers, config) {

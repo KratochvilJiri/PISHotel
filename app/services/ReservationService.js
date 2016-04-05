@@ -4,6 +4,7 @@ var ValidationResult = require('./../models/ValidationResultStructure');
 var PensionTypes = require('./../configurations/PensionType');
 var PaymentTypes = require('./../configurations/PaymentType');
 var ReservationState = require('../models/StatModel').ReservationState;
+var CustomerService = require('./CustomerService');
 
 ReservationService = {
 
@@ -54,7 +55,30 @@ ReservationService = {
         return false;
     },
     // Save reservation
-    save: function(reservation, callback) {
+    save: function(reservation, callback)   {
+        // Saving reservation for existing customer
+        if (reservation.customer._id) {
+            ReservationService._save(reservation, callback);
+        }
+        // Saving reservation for new customer
+        else {
+            // Save customer
+            CustomerService.save(reservation.customer, function (validation) {
+                // Check if customer saved
+                if (!validation.isValid) {
+                    callback(validation);
+                    return;
+                }
+
+                // Save reservation with saved customer
+                reservation.customer = validation.data;
+                ReservationService._save(reservation, callback);
+                return;
+            });
+        }
+    },
+    // Save reservation
+    _save: function(reservation, callback) {
         // Validate reservation before saving
         var validation = this.validate(reservation);
 

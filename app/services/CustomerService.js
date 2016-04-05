@@ -63,7 +63,8 @@ module.exports = {
                 }
 
                 // Call user function
-                callback(validation, dbCustomer);
+                validation.data = dbCustomer;
+                callback(validation);
                 return;
             });
         }
