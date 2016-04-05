@@ -25,6 +25,7 @@
 		.success(function (data, status, headers, config) {
 		    if (data.isValid) {
 		        $state.go('home.customers.list');
+		        $scope.showSuccess("Zákazník byl úspěšně vytvořen");
 		    }
 		    else {
 		        $scope.showError(data.errors);

@@ -1,4 +1,4 @@
-administrationModule.controller('UserAdministrationController', ['$scope', '$state', '$stateParams', 'UserService', function ($scope, $state, $stateParams, UserService) {
+﻿administrationModule.controller('UserAdministrationController', ['$scope', '$state', '$stateParams', 'UserService', function ($scope, $state, $stateParams, UserService) {
 
 	// define user for binding
     $scope.user = {};
@@ -21,15 +21,13 @@ administrationModule.controller('UserAdministrationController', ['$scope', '$sta
     }
 
 
-	// clear form
-	// $scope.formData = {};
-
 	// save
 	$scope.save = function () {
 	    UserService.save($scope.user)
 		.success(function (data, status, headers, config) {
 		    if (data.isValid) {
 		        $state.go('home.administration.users');
+		        $scope.showSuccess("Uživatel byl úspěšně uložen");
 		    }
 		    else {
 		        $scope.showError(data.errors);

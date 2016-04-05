@@ -37,7 +37,7 @@
         UserService.save($scope.user)
 		.success(function (data, status, headers, config) {
 		    if (data.isValid) {
-		        $state.go('home.dashboard');
+		        $scope.showSuccess("Profil byl úspěšně uložen");
 		    }
 		    else {
 		        $scope.showError(data.errors);
