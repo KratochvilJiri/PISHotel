@@ -13,7 +13,7 @@ module.exports = {
         session.user = null;
 
         // Return validation
-        return validation;
+        callback(validation);
     },
     // Authorize user
     authorize: function (user, session, callback) {

@@ -13,6 +13,14 @@
         getFiltered: function(query) {
             return $http.post("/api/reservation/filtered", query);
         },
+        // Get all available rooms
+        getAvailableRooms: function (period) {
+            return $http.post("/api/reservation/rooms", period);
+        },
+        // Get services
+        getServices: function () {
+            return $http.get("/api/reservation/service");
+        },
         // Get payment types
         getPaymentTypes: function () {
             return $http.get("/api/reservation/payments");

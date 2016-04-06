@@ -7,6 +7,21 @@ module.exports = {
         ADMIN: 0,
         RECEPTIONIST: 1
     },
+    // Permission module
+    PermissionModule: {
+        CUSTOMER: 'CustomerModule',
+        RESERVATION: 'ReservationModule',
+        ADMINISTRATION: 'AdministrationModule',
+        ADMINISTRATION_ROOM: 'AdministrationModule.RoomModule',
+        ADMINISTRATION_EQUIPMENT: 'AdministrationModule.EquipmentModule',
+        ADMINISTRATION_SERVICE: 'AdministrationModule.ServiceModule',
+        ADMINISTRATION_USER: 'AdministrationModule.UserModule'
+    },
+    // Permission type
+    PermissionType: {
+        READ: 'Read',
+        WRITE: 'Write'
+    },
     // PremisesType
     PremisesType: {
         KITCHEN: 0,

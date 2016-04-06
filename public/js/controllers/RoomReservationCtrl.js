@@ -1,7 +1,7 @@
 ﻿reservations
 .controller('RoomReservationController', [
-    '$scope', '$state', '$stateParams', 'CustomerService', 'RoomService', 'ReservationService', 'ServiceService',
-    function ($scope, $state, $stateParams, CustomerService, RoomService, ReservationService, ServiceService) {
+    '$scope', '$state', '$stateParams', 'CustomerService', 'ReservationService',
+    function ($scope, $state, $stateParams, CustomerService, ReservationService) {
     $scope.reservation = {};
     $scope.customers = [];
     $scope.services = [];
@@ -142,7 +142,7 @@
             reservation = $stateParams.reservationId;
 
         // Get available rooms
-        RoomService.getAvailable({
+        ReservationService.getAvailableRooms({
             period: {
                 dateFrom: $scope.reservation.dateFrom,
                 dateTo: $scope.reservation.dateTo
@@ -163,7 +163,7 @@
 
         // Load services
     var loadServices = function () {
-        ServiceService.getAll()
+        ReservationService.getServices()
         .success(function (data, status, headers, config) {
             if (data.isValid)
                 $scope.services = data.data;
