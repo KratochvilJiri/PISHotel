@@ -1,7 +1,7 @@
 ﻿// Load required modules
 var UserModel = require('./../models/UserModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
-var Permissions = require('./../security/Permissions');
+var Permissions = require('./../configurations/AppPermissions');
 
 module.exports = {
     // Deauthorize user
@@ -49,7 +49,7 @@ module.exports = {
                 name: dbUser.name,
                 role: dbUser.role,
                 _id: dbUser._id,
-                permissions: Permissions[0]
+                permissions: Permissions.get(dbUser.role)
             }
             
 

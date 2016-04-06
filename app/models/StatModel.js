@@ -4,8 +4,8 @@
 module.exports = {
     // Role
     Role: {
-        RECEPTIONIST: 0,
-        ADMIN: 1
+        ADMIN: 0,
+        RECEPTIONIST: 1
     },
     // PremisesType
     PremisesType: {
