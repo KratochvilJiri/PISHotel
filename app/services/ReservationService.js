@@ -55,7 +55,16 @@ ReservationService = {
         return false;
     },
     // Save reservation
-    save: function(reservation, callback)   {
+    save: function (reservation, callback) {
+        // Validate reservation before saving
+        var validation = this.validate(reservation);
+
+        // If validation is not valid, return it
+        if (!validation.isValid) {
+            callback(validation);
+            return;
+        }
+
         // Saving reservation for existing customer
         if (reservation.customer._id) {
             ReservationService._save(reservation, callback);
@@ -79,15 +88,6 @@ ReservationService = {
     },
     // Save reservation
     _save: function(reservation, callback) {
-        // Validate reservation before saving
-        var validation = this.validate(reservation);
-
-        // If validation is not valid, return it
-        if (!validation.isValid) {
-            callback(validation);
-            return;
-        }
-
         // Check if _id is set
         if (reservation._id) {
             // It is, so we are updating existing one
