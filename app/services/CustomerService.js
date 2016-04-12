@@ -78,6 +78,11 @@ module.exports = {
         validation.checkIsDefinedAndNotEmpty('ID', "Číslo občanského průkazu je povinné");
         validation.checkIsDefinedAndNotEmpty('name', "Jméno je povinné");
 
+        // Check if ID is number if is set 
+        if (customer.ID) {
+            validation.checkRegExp('ID', "^\\d+$", "Číslo občanského průkazu smí obsahovat pouze číslice");
+        }
+
         // If contacts array is not empty, check if data are set
         if (validation.data.contact) {
             // Check each contact

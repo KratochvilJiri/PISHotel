@@ -22,6 +22,40 @@ module.exports = function (data) {
         return false;
     }
 
+    // Check property for given regular expression
+    this.checkRegExp = function (property, regexp, error) {
+        // Init expression
+        var rgxp = new RegExp(regexp);
+        if (this.data[property].search(rgxp) >= 0)
+            return true;
+
+        // Does not match the expression
+        this.addError(error);
+        return false;
+    }
+
+    // Check if value of property is lesser or equal
+    this.checkIsLesserOrEqual = function (property, value, error) {
+        // Check
+        if (this.data[property] <= value)
+            return true;
+
+        // Value is not lesser or equal
+        this.addError(error);
+        return false;
+    }
+
+    // Check if valu of property is lesser or equal
+    this.checkIsGreaterOrEqual = function (property, value, error) {
+        // Check
+        if (this.data[property] >= value)
+            return true;
+
+        // Value is not greater or equal
+        this.addError(error);
+        return false;
+    }
+
     // Append validation
     this.append = function(validation)   {
         this.errors = this.errors.concat(validation.errors);
