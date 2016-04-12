@@ -42,6 +42,10 @@
 
     // remove Customer by ID
     $scope.remove = function (customerID) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat zákazníka?"))
+            return;
+
         CustomerService.delete(customerID)
  		.success(function (data) {
  		    if (data.isValid) {

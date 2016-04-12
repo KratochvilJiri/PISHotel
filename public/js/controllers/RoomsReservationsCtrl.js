@@ -41,6 +41,10 @@
 
     // remove reservation by _id
     $scope.remove = function (reservationID) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat rezervaci?"))
+            return;
+
         ReservationService.delete(reservationID).success(function (data) {
             if (data.isValid) {
                 loadReservations();

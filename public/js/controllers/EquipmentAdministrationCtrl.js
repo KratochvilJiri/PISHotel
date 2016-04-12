@@ -25,6 +25,10 @@
     
     // Remove item
     $scope.remove = function (equipment) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat vybavení?"))
+            return;
+
         EquipmentService.delete(equipment._id)
             .success(function (data, status, headers, config) {
                 if (data.isValid) {

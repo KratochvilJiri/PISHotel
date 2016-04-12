@@ -25,6 +25,10 @@
 
     // Remove item
     $scope.remove = function (service) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat rezervaci?"))
+            return;
+
         ServiceService.delete(service._id)
             .success(function (data, status, headers, config) {
                 if (data.isValid) {

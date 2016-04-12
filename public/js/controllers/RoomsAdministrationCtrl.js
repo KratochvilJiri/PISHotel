@@ -15,6 +15,10 @@
 
     // remove room by _id
     $scope.remove = function (roomID) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat pokoj?"))
+            return;
+
         RoomService.delete(roomID).success(function (data) {
             if (data.isValid) {
                 loadRooms();

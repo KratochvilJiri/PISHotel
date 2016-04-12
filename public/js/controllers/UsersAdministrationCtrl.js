@@ -15,6 +15,10 @@
 
     // remove user by ID
     $scope.remove = function (userID) {
+        // Confirmation dialog
+        if (!confirm("Opravdu chcete smazat uživatele?"))
+            return;
+
         UserService.delete(userID)
  		.success(function (data) {
  		    if (data.isValid) {
