@@ -3,6 +3,8 @@
     '$scope', '$state', '$stateParams', 'CustomerService', 'ReservationService',
     function ($scope, $state, $stateParams, CustomerService, ReservationService) {
     $scope.reservation = {};
+    $scope.reservation.numberOfChildren = 0;
+    $scope.reservation.numberOfAdults = 0;
     $scope.customers = [];
     $scope.services = [];
     $scope.rooms = [];

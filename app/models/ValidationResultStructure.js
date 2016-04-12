@@ -22,6 +22,17 @@ module.exports = function (data) {
         return false;
     }
 
+    // Check if given property is defined
+    this.checkIsDefined = function (property, error) {
+        // Check 
+        if (property in this.data && this.data[property] != null)
+            return true;
+
+        // Property is not defined, so add error
+        this.addError(error);
+        return false;
+    }
+
     // Check property for given regular expression
     this.checkRegExp = function (property, regexp, error) {
         // Init expression

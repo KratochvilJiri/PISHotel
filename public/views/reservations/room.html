@@ -50,11 +50,11 @@
     <div class="two fields">
         <div class="field">
             <label>Počet dospelých</label>
-            <input placeholder="Počet dospelých" type="number" ng-model="reservation.numberOfAdults">
+            <input placeholder="Počet dospelých" type="number" min="0" ng-model="reservation.numberOfAdults">
         </div>
         <div class="field">
             <label>Počet dětí</label>
-            <input placeholder="Počet dětí" type="number" ng-model="reservation.numberOfChildren">
+            <input placeholder="Počet dětí" type="number" min="0" ng-model="reservation.numberOfChildren">
         </div>
     </div>
     <div class="two fields">

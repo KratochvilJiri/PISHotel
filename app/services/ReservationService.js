@@ -170,6 +170,19 @@ ReservationService = {
         validation.checkIsDefinedAndNotEmpty('pensionType', "Typ stravování je povinný");
         validation.checkIsDefinedAndNotEmpty('paymentType', "Typ platby je povinný");
 
+        // Check if numbers are defined
+        validation.checkIsDefined('numberOfAdults', "Počet dospělých musí být zadán");
+        validation.checkIsDefined('numberOfChildren', "Počet dětí musí být zadán");
+
+        // Check number of inhabitants
+        validation.checkIsGreaterOrEqual('numberOfAdults', 0, "Počet dospělých nesmí být záporný");
+        validation.checkIsGreaterOrEqual('numberOfChildren', 0, "Počet dětí nesmí být záporný");
+
+        // At least one guy should be there
+        if (validation.data.numberOfAdults == 0 && validation.data.numberOfChildren == 0) {
+            validation.addError("V pokoji musí být ubytován alespoň jeden dospělý nebo jedno dítě");
+        }
+
         // Return validation
         return validation;
     },
