@@ -166,9 +166,10 @@ ReservationService = {
         validation.checkIsDefinedAndNotEmpty('customer', "Zákazník je povinný");
         validation.checkIsDefinedAndNotEmpty('room', "Pokoj je povinný");
         validation.checkIsDefinedAndNotEmpty('dateFrom', "Datum od je povinné");
-        validation.checkIsDefinedAndNotEmpty('dateFrom', "Datum do je povinné");
+        validation.checkIsDefinedAndNotEmpty('dateTo', "Datum do je povinné");
         validation.checkIsDefinedAndNotEmpty('pensionType', "Typ stravování je povinný");
         validation.checkIsDefinedAndNotEmpty('paymentType', "Typ platby je povinný");
+
 
         // Check if numbers are defined
         validation.checkIsDefined('numberOfAdults', "Počet dospělých musí být zadán");
@@ -178,6 +179,11 @@ ReservationService = {
         validation.checkIsGreaterOrEqual('numberOfAdults', 0, "Počet dospělých nesmí být záporný");
         validation.checkIsGreaterOrEqual('numberOfChildren', 0, "Počet dětí nesmí být záporný");
 
+        //Check if dateFrom is before dateTo
+        if(validation.data.dateTo < validation.data.dateFrom){
+          validation.addError("Datum začátku pobytu musí být před datem konce pobytu.");
+        }
+        
         // At least one guy should be there
         if (validation.data.numberOfAdults == 0 && validation.data.numberOfChildren == 0) {
             validation.addError("V pokoji musí být ubytován alespoň jeden dospělý nebo jedno dítě");
