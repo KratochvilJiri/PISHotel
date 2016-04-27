@@ -76,6 +76,7 @@ var UserService = {
         // Check required values
         validation.checkIsDefinedAndNotEmpty('login', "Uživatelské jméno je povinné");
         validation.checkIsDefinedAndNotEmpty('name', "Jméno uživatele je povinné");
+        validation.checkIsDefinedAndNotEmpty('role', "Role uživatele je povinná");
 
         // Check password only if saving new
         if (!validation.data._id)
