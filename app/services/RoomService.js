@@ -11,63 +11,77 @@ module.exports = {
         // Validate room before saving
         var validation = this.validate(room);
 
-        // If validation is not valid, return it
-        if (!validation.isValid) {
-            callback(validation);
-            return;
-        }
-
-        // Check if _id is set
-        if (room._id) {
-            // It is, so we are updating existing one
-            RoomModel.findById(room._id, function (err, dbRoom) {
-                // Check for error
-                if (err) {
-                    validation.addError("Pokoj se nezdařilo nalézt v databázi");
-                    callback(validation);
-                    return;
-                }
-
-                // Update room and save it
-                dbRoom.ID = room.ID;
-                dbRoom.price = room.price;
-                dbRoom.roomType = room.roomType;
-
-                // If premises is set, update it
-                dbRoom.premises = room.premises;
-
-                // Save room
-                dbRoom.save(function (err) {
-                    if (err) {
-                        validation.addError("Pokoj se nezdařilo uložit");
-                        callback(validation);
-                        return;
-                    }
-
-                    // Call user function
-                    callback(validation);
-                    return;
-                });
-            })
-        }
-            // We are creating new
-        else {
-            RoomModel.create(room, function (err, dbRoom) {
-                // Something went wrong
-                if (err) {
-                    validation.addError("Pokoj se nezdařilo uložit");
-                    callback(validation);
-                    return;
-                }
-
-                // Call user function
+        RoomModel.count({ ID: room.ID }, function (err, count) {
+            if (err) {
+                validation.addError("Nepodařilo se získat počet duplicit v názvu pokojů.");
                 callback(validation);
                 return;
-            });
-        }
+            }
+            if (count != 0) {
+                validation.addError("Pokoj s tímto identifikátorem již existuje");
+                callback(validation);
+                return;
+            }
+            else {
+                // If validation is not valid, return it
+                if (!validation.isValid) {
+                    callback(validation);
+                    return;
+                }
+                // Check if _id is set
+                if (room._id) {
+                    // It is, so we are updating existing one
+                    RoomModel.findById(room._id, function (err, dbRoom) {
+                        // Check for error
+                        if (err) {
+                            validation.addError("Pokoj se nezdařilo nalézt v databázi");
+                            callback(validation);
+                            return;
+                        }
+
+                        // Update room and save it
+                        dbRoom.ID = room.ID;
+                        dbRoom.price = room.price;
+                        dbRoom.roomType = room.roomType;
+
+                        // If premises is set, update it
+                        dbRoom.premises = room.premises;
+
+                        // Save room
+                        dbRoom.save(function (err) {
+                            if (err) {
+                                validation.addError("Pokoj se nezdařilo uložit");
+                                callback(validation);
+                                return;
+                            }
+
+                            // Call user function
+                            callback(validation);
+                            return;
+                        });
+                    })
+                }
+                // We are creating new
+                else {
+                    RoomModel.create(room, function (err, dbRoom) {
+                        // Something went wrong
+                        if (err) {
+                            validation.addError("Pokoj se nezdařilo uložit");
+                            callback(validation);
+                            return;
+                        }
+
+                        // Call user function
+                        callback(validation);
+                        return;
+                    });
+                }
+
+            }
+        })
     },
     // Validate
-    validate: function(room)    {
+    validate: function (room) {
         // Init validation
         var validation = new ValidationResult(room);
 
@@ -205,28 +219,28 @@ module.exports = {
             callback(validation);
             return;
         }
-        
-         //check if there are any reservations on the room
-         ReservationModel.count({room:room._id}, function(err, count) {
-           
-           if(count > 0){
-              validation.addError("Nelze smazat pokoj pro který existují rezervace.");
-              callback(validation);
-              return;            
-            }
-           
-            RoomModel.remove(room, function (err, dbRoom) {
-            // Something went wrong
-            if (err) {
-                validation.addError("Nezdařilo se odebrat pokoj");
+
+        //check if there are any reservations on the room
+        ReservationModel.count({ room: room._id }, function (err, count) {
+
+            if (count > 0) {
+                validation.addError("Nelze smazat pokoj pro který existují rezervace.");
                 callback(validation);
                 return;
             }
 
-            // Call user callback
-            callback(validation);
-          });
-         });
+            RoomModel.remove(room, function (err, dbRoom) {
+                // Something went wrong
+                if (err) {
+                    validation.addError("Nezdařilo se odebrat pokoj");
+                    callback(validation);
+                    return;
+                }
+
+                // Call user callback
+                callback(validation);
+            });
+        });
 
 
     }
