@@ -4,8 +4,7 @@
     $scope.customers = [];
 
     $scope.$watch('filter', function (value) {
-        if (value)
-            loadCustomers();
+        loadCustomers();
     });
 
     // getAll customers - every page-load
