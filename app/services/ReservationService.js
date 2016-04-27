@@ -22,7 +22,7 @@ ReservationService = {
                 if (newState == ReservationState.CONFIRMED)
                     return true;
                 // -> CANCELED
-                else if (ewState == ReservationState.CANCELED)
+                else if (newState == ReservationState.CANCELED)
                     return true
                 
                 // None
