@@ -7,7 +7,7 @@
 </div>
 <form class="ui form attached fluid segment">
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Login</label>
             <input placeholder="Login" type="text" ng-model="user.login">
         </div>
@@ -16,7 +16,7 @@
             <input placeholder="Password" type="password" ng-model="user.password">
         </div>
     </div>
-    <div class="field">
+    <div class="field required">
         <label>Jméno</label>
         <input placeholder="Jméno" type="text" ng-model="user.name">
     </div>
@@ -43,7 +43,8 @@
         </div>
     </div>
     <div>
-        <div ng-repeat="contact in user.contact" class="field">
+        <div ng-repeat="contact in user.contact" class="field required">
+            <label>Kontakt</label>
             <div ng-if="contact.contactType == 0" class="ui labeled left icon action input">
                 <i class="mail icon"></i>
                 <input ng-model="contact.data" type="text" placeholder="Zadejte email">

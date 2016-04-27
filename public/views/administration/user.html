@@ -7,22 +7,22 @@
 </div>
 <form class="ui form attached fluid segment">
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Role</label>
             <select ng-options="role.id as role.name for role in roles" class="ui dropdown" ng-model="user.role">
                 <option value="">Vyberte roli</option>
             </select>
         </div>
-        <div class="field">
+        <div class="field required">
             <label>Login</label>
             <input placeholder="Login" type="text" ng-model="user.login">
         </div>
     </div>
-    <div class="field">
+    <div class="field required">
         <label>Heslo</label>
         <input placeholder="Password" type="password" ng-model="user.password">
     </div>
-    <div class="field">
+    <div class="field required">
         <label>Jméno</label>
         <input placeholder="Jméno" type="text" ng-model="user.name">
     </div>

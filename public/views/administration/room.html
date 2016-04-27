@@ -6,18 +6,18 @@
     </div>
 </div>
 <form class="ui form attached fluid segment">
-    <div class="field">
+    <div class="field required">
         <label>Identifikátor</label>
         <input placeholder="Identifikátor" type="text" ng-model="room.ID">
     </div>
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Typ pokoje</label>
             <select ng-options="roomType.name for roomType in roomTypes track by roomType.code" class="ui dropdown" ng-model="room.roomType">
                 <option value="">Vyberte typ pokoje</option>
             </select>
         </div>
-        <div class="field">
+        <div class="field required">
             <label>Cena za noc</label>
             <div class="ui right labeled input">
                 <input type="text" placeholder="Cena" ng-model="room.price">

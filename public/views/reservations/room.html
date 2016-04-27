@@ -6,7 +6,8 @@
     </div>
 </div>
 <form class="ui form attached fluid segment">
-    <div class="field">
+    <div class="field required">
+        <label>Zákazník</label>
         <div class="ui floating labeled icon dropdown button">
             <i class="user icon"></i>
             <span ng-if="!reservation.customer._id" class="text">Volba zákazníka</span>
@@ -48,7 +49,7 @@
 </form>
 <form class="ui form attached fluid segment">
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Počet dospelých</label>
             <input placeholder="Počet dospelých" type="number" min="0" ng-model="reservation.numberOfAdults">
         </div>
@@ -58,16 +59,17 @@
         </div>
     </div>
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Datum začátku pobytu</label>
             <input type="date" ng-model="reservation.dateFrom" format-date>
         </div>
-        <div class="field">
+        <div class="field required">
             <label>Datum konce pobytu</label>
             <input type="date" ng-model="reservation.dateTo" format-date>
         </div>
     </div>
-    <div class="field">
+    <div class="field required">
+        <label>Pokoj</label>
         <div class="ui floating labeled basic icon dropdown button">
             <i class="list icon"></i>
             <span ng-if="!reservation.room" class="text">Volba pokoje</span>
@@ -87,14 +89,14 @@
         </div>
     </div>
     <div class="two fields">
-        <div class="field">
+        <div class="field required">
             <label>Typ penze</label>
             <select ng-options="(item.name + ' za ' + item.value + ' CZK') for item in pensionTypes track by item.code" class="ui dropdown"
                     ng-model="reservation.pensionType">
                 <option value="">Vyberte penzi</option>
             </select>
         </div>
-        <div class="field">
+        <div class="field required">
             <label>Způsob platby</label>
             <select ng-options="item.name for item in paymentTypes track by item.code" class="ui dropdown" ng-model="reservation.paymentType">
                 <option value="">Vyberte způsob platby</option>
