@@ -31,3 +31,17 @@
     </div>
   </div>
 </div>
+
+
+<div class="ui icon negative message status-alert" style="display: none">
+    <i class="warning circle icon"></i>
+    <i class="close icon"></i>
+    <div class="content">
+        <div class="header">
+            Operace selhala
+        </div>
+        <ul class="list">
+            <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
+    </div>
+</div>
