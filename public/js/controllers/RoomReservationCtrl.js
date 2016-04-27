@@ -33,7 +33,9 @@
         ReservationService.save($scope.reservation)
 		.success(function (data, status, headers, config) {
 		    if (data.isValid) {
-		        $scope.showSuccess("Stav rezervace byl úspešně změněn");
+                $state.go($state.current,{}, {reload: true}).then(function(){
+                    $scope.showSuccess("Stav rezervace byl úspěšně změněn");
+                })
 		    }
 		    else {
 		        $scope.showError(data.errors);
