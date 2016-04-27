@@ -106,7 +106,6 @@ ReservationService = {
                     return;
                 }
 
-
                 // If new state is calculation, calculate reservation
                 if (dbReservation.state != reservation.state && reservation.state == ReservationState.CALCULATED)
                     dbReservation.calculation = ReservationService.calculate(reservation);
