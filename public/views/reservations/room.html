@@ -181,9 +181,10 @@
     </tbody>
 </table>
 <div class="ui bottom attached message">
-    <a ng-click="save()" class="ui button fontWhite BGOrange">
-        <i class="save icon"></i> Uložit
+    <a ng-click="save()" class="ui button fontWhite BGOrange" ng-class="{'disabled': (reservation.state == 2 || reservation.state == 4)}">
+        <i class="save icon"></i> Uložit 
     </a>
+    <p ng-if="reservation.state == 2 || reservation.state == 4"><i class="info icon"></i>Uzavřenou či zrušenou rezervaci již nelze editovat.</p>
     <span ng-if="reservation._id">
         <a ng-click="reservationStateChanged(1)" class="ui button fontWhite BGOrange" ng-if="reservation.state == 0">
             <i class="check circle outline icon"></i> Potvrdit
