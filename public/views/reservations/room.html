@@ -51,11 +51,11 @@
     <div class="two fields">
         <div class="field required">
             <label>Počet dospelých</label>
-            <input placeholder="Počet dospelých" type="number" min="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}" ng-model="reservation.numberOfAdults">
+            <input placeholder="Počet dospelých" type="number" min="0"  ng-model="reservation.numberOfAdults">
         </div>
         <div class="field">
             <label>Počet dětí</label>
-            <input placeholder="Počet dětí" type="number" min="0"  onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}" ng-model="reservation.numberOfChildren">
+            <input placeholder="Počet dětí" type="number" min="0" ng-model="reservation.numberOfChildren">
         </div>
     </div>
     <div class="two fields">
@@ -126,7 +126,7 @@
                 </select>
             </td>
             <td class="editable">
-                <input type="number" min="0" onKeyUp="if(this.value>99){this.value='99';}else if(this.value<0){this.value='0';}" ng-model="newReservationService.count" placeholder="Zadejte počet" />
+                <input type="number" min="0" ng-model="newReservationService.count" placeholder="Zadejte počet" />
             </td>
             <td></td>
             <td>
