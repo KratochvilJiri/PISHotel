@@ -11,13 +11,15 @@ module.exports = {
         // Validate room before saving
         var validation = this.validate(room);
 
-        RoomModel.count({ ID: room.ID }, function (err, count) {
+        
+        RoomModel.find({ ID: room.ID }, function (err, rooms) {
             if (err) {
                 validation.addError("Nepodařilo se získat počet duplicit v názvu pokojů.");
                 callback(validation);
                 return;
             }
-            if (count != 0) {
+            
+            if (rooms.length > 0 && (!room._id || room._id != rooms[0]._id)) {
                 validation.addError("Pokoj s tímto identifikátorem již existuje");
                 callback(validation);
                 return;
