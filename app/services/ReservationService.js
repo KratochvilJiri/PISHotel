@@ -90,7 +90,6 @@ ReservationService = {
     _save: function (reservation, callback) {
         // Check if _id is set
         if (reservation._id) {
-            validation.errors = [];
             // It is, so we are updating existing one
             ReservationModel.findById(reservation._id, function (err, dbReservation) {
                 // Check for error
@@ -157,7 +156,6 @@ ReservationService = {
                 // Something went wrong
                 if (err) {
                     validation.addError("Rezervaci se nezdařilo uložit");
-                    console.log(err);
                     callback(validation);
                     return;
                 }
