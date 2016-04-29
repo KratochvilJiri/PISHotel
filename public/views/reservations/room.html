@@ -4,6 +4,7 @@
     <div class="header">
         Rezervace
     </div>
+    <p ng-if="reservation._id">{{stateToString(reservation.state)}}</p>
 </div>
 <form class="ui form attached fluid segment">
     <div class="field required">

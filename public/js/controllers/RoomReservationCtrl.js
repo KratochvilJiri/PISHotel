@@ -3,6 +3,7 @@
         '$scope', '$state', '$stateParams', 'CustomerService', 'ReservationService',
         function ($scope, $state, $stateParams, CustomerService, ReservationService) {
             $scope.reservation = {};
+            $scope.reservation.state = 0;
             $scope.reservation.numberOfChildren = 0;
             $scope.reservation.numberOfAdults = 0;
             $scope.customers = [];
@@ -220,6 +221,11 @@
                     .error(function (data, status) {
                         console.error('Error: ', status, data.error);
                     });
+            }
+
+            // Get string for state
+            $scope.stateToString = function (state) {
+                return StatUtility.Reservation.toString(state);
             }
 
             // Load all needed
