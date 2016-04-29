@@ -67,7 +67,7 @@ ReservationService = {
 
         // Saving reservation for existing customer
         if (reservation.customer._id) {
-            ReservationService._save(reservation, callback);
+            ReservationService._save(reservation, validation, callback);
         }
         // Saving reservation for new customer
         else {
@@ -81,13 +81,13 @@ ReservationService = {
 
                 // Save reservation with saved customer
                 reservation.customer = validation.data;
-                ReservationService._save(reservation, callback);
+                ReservationService._save(reservation, validation, callback);
                 return;
             });
         }
     },
     // Save reservation
-    _save: function (reservation, callback) {
+    _save: function (reservation, validation, callback) {
         // Check if _id is set
         if (reservation._id) {
             // It is, so we are updating existing one
@@ -106,13 +106,13 @@ ReservationService = {
                     return;
                 }
 
-                if (dbReservation.state == 2) {
+                if (dbReservation.state == ReservationState.CANCELED) {
                     validation.addError("Rezervaci se nezdařilo uložit - nelze menit rezervaci ve stavu stornováno.");
                     callback(validation);
                     return;
                 }
 
-                if (dbReservation.state == 4) {
+                if (dbReservation.state == ReservationState.COMPLETED) {
                     validation.addError("Rezervaci se nezdařilo uložit - nelze menit rezervaci ve stavu uzavřeno.");
                     callback(validation);
                     return;

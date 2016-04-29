@@ -117,6 +117,7 @@
                     .success(function (data, status, headers, config) {
                         if (data.isValid) {
                             $state.go('home.reservations.rooms');
+                            $scope.showSuccess("Uložení rezervace proběhlo úspěšně");
                         }
                         else {
                             $scope.showError(data.errors);
