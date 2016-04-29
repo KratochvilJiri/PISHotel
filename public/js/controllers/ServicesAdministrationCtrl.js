@@ -7,6 +7,10 @@
 
     // Save item
     $scope.save = function (service) {
+        // Values have to be set
+        console.log(service);
+        if (!service.name || !service.price || service.price < 0)
+            return;
         ServiceService.save(service)
             .success(function (data, status, headers, config) {
                 if (data.isValid) {

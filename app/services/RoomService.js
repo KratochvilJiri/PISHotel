@@ -90,6 +90,7 @@ module.exports = {
         // Check all required properties
         validation.checkIsDefinedAndNotEmpty('ID', "Identifikátor je povinný");
         validation.checkIsDefinedAndNotEmpty('price', "Cena je povinná");
+        validation.checkIsGreaterOrEqual('price', 0, "Cena pokoje nemůže být záporná");
         validation.checkIsDefinedAndNotEmpty('roomType', "Typ je povinný");
 
         // Return validation
