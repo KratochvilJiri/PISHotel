@@ -193,6 +193,9 @@ ReservationService = {
         if (validation.data.dateTo < validation.data.dateFrom) {
             validation.addError("Datum začátku pobytu musí být před datem konce pobytu.");
         }
+        if(validation.data.dateTo == validation.data.dateFrom) {
+            validation.addError("Rezervace musí být alespoň na jednu noc.");
+        }
 
         // At least one guy should be there
         if (validation.data.numberOfAdults == 0 && validation.data.numberOfChildren == 0) {
