@@ -1,6 +1,6 @@
 // Load required modules
 var UserModel = require('./../models/UserModel');
-var ValidationResult = require('./../models/ValidationResultStructure'); 
+var ValidationResult = require('./../models/ValidationResultStructure');
 
 var UserService = {
     // Save user
@@ -14,59 +14,75 @@ var UserService = {
             return;
         }
 
-        // Check if _id is set
-        if (user._id) {
-            // It is, so we are updating existing one
-            UserModel.findById(user._id, function (err, dbUser) {
-                // Check for error
-                if (err) {
-                    validation.addError("Uživatele se nezdařilo nalézt v databázi");
-                    callback(validation);
-                    return;
-                }
-
-                // Update user and save it
-                dbUser.name = user.name;
-                dbUser.role = user.role;
-                dbUser.login = user.login;
-                dbUser.address = user.address;
-
-                // If password is set, change it
-                if (user.password)
-                    dbUser.password = user.password;
-                // If contact is set, change it
-                if (user.contact)
-                    dbUser.contact = user.contact;
-
-                // Save user
-                dbUser.save(function (err) {
-                    if (err) {
-                        validation.addError("Uživatele se nezdařilo uložit");
-                        callback(validation);
-                        return;
-                    }
-
-                    // Call user function
-                    callback(validation);
-                    return;
-                });
-            })
-        }
-            // We are creating new
-        else {
-            UserModel.create(user, function (err, dbUser) {
-                // Something went wrong
-                if (err) {
-                    validation.addError("Uživatele se nezdařilo uložit");
-                    callback(validation);
-                    return;
-                }
-
-                // Call user function
+        UserModel.find({ login: user.login }, function (err, users) {
+            if (err) {
+                validation.addError("Nepodařilo se získat počet duplicit v loginech uživatelů.");
                 callback(validation);
                 return;
-            });
-        }
+            }
+
+            if (users.length > 0 && (!user._id || user._id != users[0]._id)) {
+                validation.addError("Uživatel s tímto loginem již existuje");
+                callback(validation);
+                return;
+            }
+            else {
+
+                // Check if _id is set
+                if (user._id) {
+                    // It is, so we are updating existing one
+                    UserModel.findById(user._id, function (err, dbUser) {
+                        // Check for error
+                        if (err) {
+                            validation.addError("Uživatele se nezdařilo nalézt v databázi");
+                            callback(validation);
+                            return;
+                        }
+
+                        // Update user and save it
+                        dbUser.name = user.name;
+                        dbUser.role = user.role;
+                        dbUser.login = user.login;
+                        dbUser.address = user.address;
+
+                        // If password is set, change it
+                        if (user.password)
+                            dbUser.password = user.password;
+                        // If contact is set, change it
+                        if (user.contact)
+                            dbUser.contact = user.contact;
+
+                        // Save user
+                        dbUser.save(function (err) {
+                            if (err) {
+                                validation.addError("Uživatele se nezdařilo uložit");
+                                callback(validation);
+                                return;
+                            }
+
+                            // Call user function
+                            callback(validation);
+                            return;
+                        });
+                    })
+                }
+                // We are creating new
+                else {
+                    UserModel.create(user, function (err, dbUser) {
+                        // Something went wrong
+                        if (err) {
+                            validation.addError("Uživatele se nezdařilo uložit");
+                            callback(validation);
+                            return;
+                        }
+
+                        // Call user function
+                        callback(validation);
+                        return;
+                    });
+                }
+            }
+        });
     },
     // Validate
     validate: function (user) {
@@ -77,7 +93,7 @@ var UserService = {
         validation.checkIsDefinedAndNotEmpty('login', "Uživatelské jméno je povinné");
         validation.checkIsDefinedAndNotEmpty('name', "Jméno uživatele je povinné");
         validation.checkIsDefined('role', "Role uživatele je povinná");
-        
+
 
         // Check password only if saving new
         if (!validation.data._id)
@@ -119,7 +135,7 @@ var UserService = {
         });
     },
     // Get user
-    get: function(user, callback)   {
+    get: function (user, callback) {
         // Init validation
         var validation = new ValidationResult(user);
 
@@ -146,7 +162,7 @@ var UserService = {
         })
     },
     // Remove user
-    remove: function(user, callback) {
+    remove: function (user, callback) {
         // Init validation
         var validation = new ValidationResult(user);
 
