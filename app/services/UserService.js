@@ -1,6 +1,7 @@
 // Load required modules
 var UserModel = require('./../models/UserModel');
 var ValidationResult = require('./../models/ValidationResultStructure');
+var UserRole = require('../models/StatModel').Role;
 
 var UserService = {
     // Save user
@@ -199,7 +200,8 @@ var UserService = {
             if (count > 0)
                 return;
 
-            // Save user
+            // Save user as administrator
+            user.role = UserRole.ADMIN;
             UserService.save(user, function (validation) {
                 if (!validation.isValid)
                     console.log(validation.errors);
