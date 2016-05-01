@@ -67,7 +67,7 @@
         <i class="save icon"></i>
         Uložit
     </a>
-    <a ui-sref="home.reservations.room({roomId: room._id})" class="ui button fontWhite BGOrange">
+    <a ng-if="room._id" ui-sref="home.reservations.room({roomId: room._id})" class="ui button fontWhite BGOrange">
         <i class="calendar icon"></i>
         Zobrazit historii rezervací
     </a>
